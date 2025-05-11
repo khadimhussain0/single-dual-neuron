@@ -1,0 +1,101 @@
+References
+References
+[1] Y. Huo, K. Jin, J. Cai, H. Xiong, and J. Pang, “Vision Transformer (ViT)-
+based Applications in Image Classification,” in 2023 IEEE 9th Intl Conference on Big Data Security on Cloud (BigDataSecurity), IEEE Intl Conference on High Performance and Smart Computing, (HPSC) and IEEE Intl
+Conference on Intelligent Data and Security (IDS), 2023. [Online]. Available: https://www.researchgate.net/publication/371087229_Vision_Transformer_
+ViT-based_Applications_in_Image_Classification
+[2] M. Khalil, A. Khalil, and A. Ngom, “A Comprehensive Study of Vision Transformers in Image Classification Tasks,” arXiv preprint arXiv:2312.01232, 2023. [Online].
+Available: https://arxiv.org/abs/2312.01232
+[3] Y. Wang, Y. Deng, Y. Zheng, P. Chattopadhyay, and L. Wang, “Vision Transformers
+for Image Classification: A Comparative Survey,” Technologies, vol. 13, no. 1, p. 32,
+2025. [Online]. Available: https://doi.org/10.3390/technologies13010032
+[4] S. Yang, C. Zhang, and W. Wu, “Binary output layer of feedforward neural networks
+for solving multi-class classification problems,” IEEE Access, vol. 6, pp. 80297–80306,
+2018. [Online]. Available: https://ieeexplore.ieee.org/abstract/document/8584436/
+[5] B. Asadi and H. Jiang, “On approximation capabilities of ReLU activation and
+softmax output layer in neural networks,” arXiv preprint arXiv:2002.04060, 2020.
+[Online]. Available: https://arxiv.org/abs/2002.04060
+[6] S. Yang, C. Zhang, Y. Bao, J. Yang, and W. Wu, “Binary output layer of extreme
+learning machine for solving multi-class classification problems,” Neural Computing
+and Applications, vol. 32, no. 19, pp. 15297–15310, 2020. [Online]. Available: https:
+//link.springer.com/article/10.1007/s11063-020-10236-5
+[7] H. Zheng, Z. Yang, W. Liu, J. Liang, and Y. Li, “Improving deep neural networks
+using softplus units,” in 2015 IEEE International Conference on Acoustics, Speech
+and Signal Processing (ICASSP), 2015, pp. 1681–1685. [Online]. Available: https:
+//ieeexplore.ieee.org/abstract/document/7280459/
+[8] M. Klimo, P. Lukáč, and P. Tarábek, “Deep neural networks classification via binary error-detecting output codes,” Applied Sciences, vol. 11, no. 8, p. 3563, 2021.
+[Online]. Available: https://www.mdpi.com/2076-3417/11/8/3563
+[9] R. Memisevic, C. Zach, M. Pollefeys, and P. Hebert, “Gated softmax
+classification,” in Advances in Neural Information Processing Systems, vol.
+23, 2010. [Online]. Available: https://proceedings.neurips.cc/paper/2010/hash/
+5737c6ec2e0716f3d8a7a5c4e0de0d9a-Abstract.html
+[10] S. Maharjan, A. Alsadoon, P. W. C. Prasad, and A. K. Singh, “A novel enhanced
+softmax loss function for brain tumour detection using deep learning,” Neural Computing and Applications, vol. 32, no. 19, pp. 15283–15296, 2020. [Online]. Available:
+https://www.sciencedirect.com/science/article/pii/S0165027019303772
+1
+[11] R. Hu, B. Tian, S. Yin, and S. Wei, “Efficient hardware architecture of softmax
+layer in deep neural network,” in 2018 IEEE Asia Pacific Conference on Circuits and
+Systems (APCCAS), 2018, pp. 468–471. [Online]. Available: https://ieeexplore.ieee.
+org/abstract/document/8631588/
+[12] K. Tyagi, C. Rane, K. Vaidya, J. Challgundla, and V. Kaul, “Making Sigmoid-MSE
+Great Again: Output Reset Challenges Softmax Cross-Entropy in Neural Network
+Classification,” arXiv preprint arXiv:2411.11213, 2024. [Online]. Available: https:
+//arxiv.org/abs/2411.11213
+[13] G. Alcantara, “Empirical analysis of non-linear activation functions for Deep Neural
+Networks in classification tasks,” arXiv preprint arXiv:1710.11272, 2017. [Online].
+Available: https://arxiv.org/abs/1710.11272
+[14] S. Kumar and A. Kumar, “Activation Functions in Deep Learning: A Comprehensive
+Survey and Benchmark,” arXiv preprint arXiv:2109.14545, 2021. [Online]. Available:
+https://arxiv.org/abs/2109.14545
+[15] S. Sharma, S. Sharma, and A. Athaiya, “Activation functions in neural networks,”
+International Journal of Engineering and Applied Sciences, vol. 4, no. 12, pp. 310–
+316, 2017. [Online]. Available: https://www.academia.edu/download/89662883/
+310-316_Tesma412_IJEAST.pdf
+Related Work
+The field of neural network design for classification tasks has seen significant advancements across three key areas: output-layer configurations for binary classification, Vision
+Transformer (ViT) applications in image classification, and empirical or theoretical studies on activation functions and learning dynamics.
+Output-Layer Configurations
+The choice of output-layer design is critical for binary classification tasks. Traditional
+approaches often use a single-neuron sigmoid output, as it directly maps to a probability
+distribution for two classes (4; 12). However, dual-neuron softmax outputs have also been
+explored for their ability to handle multi-class problems, with adaptations for binary tasks
+(5; 9). Yang et al. (4) proposed a binary output layer for multi-class problems, which
+can be simplified for binary classification to reduce computational overhead. Similarly,
+Klimo et al. (8) introduced binary error-detecting output codes to enhance robustness in
+classification. Tyagi et al. (12) provided a direct comparison between sigmoid with mean
+squared error and softmax with cross-entropy, highlighting the trade-offs in performance
+and convergence. These studies underscore the importance of output-layer design in
+balancing efficiency and accuracy.
+Transformer-Based Models
+Vision Transformers (ViTs) have revolutionized image classification by leveraging selfattention mechanisms (1; 2; 3). Huo et al. (1) provided a comprehensive overview of ViT
+applications, comparing them with traditional CNNs and highlighting ViT’s advantages
+2
+in handling long-range dependencies, though at the cost of higher computational requirements. Khalil et al. (2) benchmarked various ViT models, emphasizing their superior
+performance in complex image classification tasks while noting challenges like overfitting
+and data inefficiency. Wang et al. (3) conducted a comparative survey, showing that
+ViTs outperform CNNs in accuracy and efficiency, particularly for large-scale datasets.
+These studies establish ViTs as a promising alternative to CNNs for image classification,
+including binary tasks.
+Optimization and Learning Dynamics
+Activation functions play a pivotal role in neural network performance by introducing
+non-linearity (13; 14; 15). Alcantara (13) empirically analyzed various activation functions on the MNIST dataset, finding that ReLU-based functions often outperform traditional sigmoid and tanh in deeper networks due to their ability to mitigate vanishing
+gradients. Kumar and Kumar (14) surveyed 18 activation functions, categorizing them
+into Logistic Sigmoid, Tanh, ReLU, ELU, and learning-based classes, and benchmarked
+their performance across different architectures and datasets. Sharma et al. (15) provided a foundational review of activation functions, emphasizing their role in enabling
+complex pattern recognition. These studies highlight the need for careful selection of
+activation functions to optimize learning dynamics and classification accuracy.
+How Our Work Differs
+While prior research has focused on individual aspects of neural network design—such
+as output-layer configurations (4; 12), ViT applications (1; 2; 3), or activation functions (13; 14)—our study provides the first systematic comparison across CNN, ViT,
+and ResNet architectures using identical datasets for binary classification. By controlling
+for dataset and experimental conditions (e.g., Adam optimizer, learning rate of 0.001,
+ReduceLROnPlateau, early stopping), we isolate the impact of architectural choices on
+performance metrics like accuracy, F1 score, AUC, convergence speed, and statistical significance (paired t-test, p=0.0027). Our findings that single-neuron sigmoid outputs consistently outperform dual-neuron softmax outputs across these architectures contribute to
+the understanding of output-layer design in binary classification. Furthermore, our work
+bridges the gap between theoretical insights and practical applications by demonstrating
+how these design choices affect learning dynamics and optimization.
+In conclusion, our study builds on the existing literature by integrating insights from
+output-layer design, ViT applications, and activation function studies into a unified
+framework for binary classification. This work not only advances theoretical understanding but also provides actionable guidance for practitioners designing neural networks for
+binary tasks.
+3

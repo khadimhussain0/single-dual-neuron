@@ -1,0 +1,80 @@
+References
+A. Dosovitskiy et al., “An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale,” arXiv preprint arXiv:2010.11929, 2020. [Online]. Available: https://arxiv.org/abs/2010.11929
+
+Y. Wang et al., “Vision Transformers for Image Classification: A Comparative Survey,” Technologies, vol. 13, no. 1, p. 32, 2025. [Online]. Available: https://doi.org/10.3390/technologies13010032
+
+J. Maurício et al., “Comparing Vision Transformers and Convolutional Neural Networks for Image Classification: A Literature Review,” Applied Sciences, vol. 13, no. 9, p. 5521, 2023. [Online]. Available: https://www.mdpi.com/2076-3417/13/9/5521
+
+S. Eger et al., “Is it Time to Swish? Comparing Deep Learning Activation Functions Across NLP Tasks,” arXiv preprint arXiv:1901.02671, 2019. [Online]. Available: https://arxiv.org/abs/1901.02671
+
+A. D. Jagtap and G. E. Karniadakis, “How Important Are Activation Functions in Regression and Classification? A Survey, Performance Comparison, and Future Directions,” arXiv preprint arXiv:2209.02681, 2022. [Online]. Available: https://arxiv.org/abs/2209.02681
+
+D. Pedamonti, “Comparison of Non-Linear Activation Functions for Deep Neural Networks on MNIST Classification Task,” arXiv preprint arXiv:1804.02763, 2018. [Online]. Available: https://arxiv.org/abs/1804.02763
+
+Z. Qi et al., “Privacy-Preserving Image Classification Using Vision Transformer,” arXiv preprint arXiv:2205.12041, 2022. [Online]. Available: https://arxiv.org/abs/2205.12041
+
+K. Han et al., “A Survey on Vision Transformer,” IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 45, no. 1, pp. 87–110, 2023. [Online]. Available: https://doi.org/10.1109/TPAMI.2022.3147465
+
+S. Khan et al., “Transformers in Vision: A Survey,” ACM Computing Surveys, vol. 54, no. 10s, pp. 1–41, 2022. [Online]. Available: https://doi.org/10.1145/3459726
+
+A. Vaswani et al., “Attention Is All You Need,” in Advances in Neural Information Processing Systems, vol. 30, 2017. [Online]. Available: https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
+
+H. Touvron et al., “Training Data-Efficient Image Transformers & Distillation through Attention,” in Proceedings of the 38th International Conference on Machine Learning, 2021. [Online]. Available: https://arxiv.org/abs/2012.12877
+
+X. Chu et al., “Twins: Revisiting the Design of Spatial Attention in Vision Transformers,” in Advances in Neural Information Processing Systems, vol. 34, 2021. [Online]. Available: https://arxiv.org/abs/2104.13840
+
+Z. Liu et al., “Swin Transformer: Hierarchical Vision Transformer Using Shifted Windows,” in Proceedings of the IEEE/CVF International Conference on Computer Vision, 2021. [Online]. Available: https://arxiv.org/abs/2103.14030
+
+Y. Wu et al., “Visual Transformers: Token-based Image Representation and Processing for Computer Vision,” arXiv preprint arXiv:2006.03677, 2020. [Online]. Available: https://arxiv.org/abs/2006.03677
+
+M. Tan and Q. Le, “EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks,” in Proceedings of the 36th International Conference on Machine Learning, 2019. [Online]. Available: https://arxiv.org/abs/1905.11946
+
+Summaries
+Dosovitskiy et al. (2020) introduced the Vision Transformer (ViT), demonstrating that pure transformer architectures can outperform traditional CNNs in image classification tasks when trained on large datasets. This foundational work validates the use of ViTs in binary classification settings.
+
+Wang et al. (2025) provided a comprehensive survey of ViT models, comparing their performance with CNNs across various datasets. The paper highlights the evolution and optimization of ViT architectures, offering insights into their applicability in binary classification.
+
+Maurício et al. (2023) conducted a literature review comparing ViTs and CNNs, discussing their respective strengths and limitations. The study emphasizes the need for further research in applying ViTs to specific tasks like binary classification.
+
+Eger et al. (2019) performed a large-scale comparison of 21 activation functions across NLP tasks, finding that certain functions like penalized tanh outperform traditional choices. This research underscores the importance of activation function selection in neural network performance.
+
+Jagtap and Karniadakis (2022) surveyed various activation functions used in regression and classification tasks, analyzing their performance and suitability. The paper provides a taxonomy of activation functions, aiding in informed selection for binary classification models.
+
+Pedamonti (2018) compared non-linear activation functions on the MNIST dataset, highlighting how different functions affect deep neural network performance. The study offers empirical evidence for choosing appropriate activation functions in classification tasks.
+
+Qi et al. (2022) proposed a privacy-preserving image classification method using ViTs, demonstrating that encrypted images can be effectively classified without compromising accuracy. This work showcases the versatility of ViTs in handling binary classification under privacy constraints.
+
+Han et al. (2023) presented a survey on Vision Transformers, discussing their design, training strategies, and applications in computer vision. The paper provides a broad overview of ViT developments, relevant for understanding their role in binary classification.
+
+Khan et al. (2022) offered a comprehensive survey on the use of transformers in vision tasks, detailing their architectures and performance. The study serves as a resource for understanding the applicability of transformer models in binary classification.
+
+Vaswani et al. (2017) introduced the transformer architecture, which has become the foundation for models like ViT. Understanding this architecture is crucial for comprehending the mechanics behind transformer-based binary classifiers.
+
+Touvron et al. (2021) developed the Data-efficient Image Transformer (DeiT), which achieves high performance on image classification tasks with less data. This model is pertinent for binary classification scenarios with limited datasets.
+
+Chu et al. (2021) proposed the Twins architecture, enhancing spatial attention mechanisms in ViTs. Their work contributes to the development of more efficient and accurate transformer models for image classification.
+
+Liu et al. (2021) introduced the Swin Transformer, a hierarchical ViT that uses shifted windows, improving efficiency and scalability. This architecture is relevant for binary classification tasks requiring high-resolution image processing.
+
+Wu et al. (2020) discussed token-based image representation using visual transformers, offering a novel approach to image processing in computer vision tasks. Their insights are valuable for designing transformer-based binary classifiers.
+
+Tan and Le (2019) presented EfficientNet, a model that balances accuracy and efficiency in CNNs. While not a transformer model, its principles can inform the design of efficient binary classification networks.
+
+Related Work Section
+Output-Layer Configurations
+
+The design of output layers in binary classification neural networks has been a subject of extensive research. Traditional approaches often employ a single-neuron output with a sigmoid activation function, providing a probabilistic interpretation of class membership. However, alternative configurations, such as dual-neuron outputs with softmax activation, have been explored to potentially capture more complex decision boundaries. Studies like those by Eger et al. [4] and Jagtap and Karniadakis [5] delve into the impact of activation function choices on model performance, emphasizing the significance of this architectural component.
+
+Transformer-Based Models
+
+The advent of Vision Transformers (ViTs) has revolutionized image classification tasks. Dosovitskiy et al. [1] demonstrated that transformers could outperform traditional CNNs when trained on large datasets. Subsequent surveys by Wang et al. [2] and Khan et al. [9] have chronicled the evolution of ViT architectures, highlighting their adaptability and efficiency. The development of models like DeiT by Touvron et al. [11] further underscores the potential of transformers in achieving high performance with limited data, making them suitable for binary classification tasks.
+
+Optimization and Learning Dynamics
+
+Understanding the learning dynamics of neural networks is crucial for optimizing performance. Pedamonti [6] provided empirical evidence on how different activation functions influence model accuracy on the MNIST dataset. Similarly, the work by Qi et al. [7] on privacy-preserving image classification using ViTs illustrates the importance of architectural choices in maintaining performance under constraints. These studies collectively inform the selection of activation functions and model architectures in binary classification scenarios.
+
+Distinction of Our Work
+
+While existing literature has explored various aspects of neural network architectures and their applications, our study distinguishes itself by providing a systematic comparison of single-neuron versus dual-neuron output layers across different architectures—CNN, ViT, and ResNet-50—using identical datasets and standardized training protocols. By evaluating performance metrics such as accuracy, F1 score, AUC, convergence epochs, and statistical significance, we offer comprehensive insights into the efficacy of output-layer configurations in binary classification tasks.
+
+This analysis sets the stage for our methodology, where we detail the experimental setup, including dataset selection, model architectures, training procedures, and evaluation metrics, to rigorously assess the impact of output-layer design choices on model performance.

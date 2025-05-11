@@ -1,0 +1,2 @@
+Model,Output_Neurons,Classes,Test_Accuracy,Test_Precision,Test_Recall,F1_Score,ROC_AUC
+vgg16,2,0vs1,0.9755,0.9788519637462235,0.972,0.9754139488208731,0.995397

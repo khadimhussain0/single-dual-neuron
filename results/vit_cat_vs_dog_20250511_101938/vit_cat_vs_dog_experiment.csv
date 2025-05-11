@@ -1,0 +1,2 @@
+Class_A,Class_B,Single_Accuracy,Dual_Accuracy,Accuracy_Diff,Single_F1,Dual_F1,F1_Diff,Single_AUC,Dual_AUC,AUC_Diff,Single_Convergence_Epochs,Dual_Convergence_Epochs,Report_Path
+cat,dog,0.9425,0.9465,0.0040000000000000036,0.942643391521197,0.945712836123795,0.0030694446025979483,0.9871289999999999,0.98676,-0.0003689999999999527,13,15,results/comparison_vit_3vs5_20250511_101938/comparison_report.md

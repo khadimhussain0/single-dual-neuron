@@ -1,0 +1,2 @@
+Model,Output_Neurons,Classes,Test_Accuracy,Test_Precision,Test_Recall,F1_Score,ROC_AUC
+vit,1,3vs5,0.9425,0.9402985074626866,0.945,0.942643391521197,0.9871289999999999

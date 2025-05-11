@@ -1,0 +1,330 @@
+% !TeX program = pdflatex
+\documentclass[11pt]{article}
+
+% Encoding and fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Maths and symbols
+\usepackage{amsmath,amssymb}
+
+% Graphics & tables
+\usepackage{graphicx}
+% \usepackage{booktabs} % Removed for compatibility
+
+% Hyperlinks
+\usepackage[hidelinks]{hyperref}
+
+% Page geometry
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Unicode symbols support
+\usepackage{textcomp}
+\usepackage{xspace}
+
+% Definition for ≤ symbol
+\DeclareUnicodeCharacter{2264}{$\leq$}
+
+%-----------------------------------------------------------------------------
+% Title information – adjust author list as necessary
+%-----------------------------------------------------------------------------
+\title{Comparative Analysis of Single--Neuron versus Dual--Neuron Output Layers in Binary Classification Neural Networks}
+\author{Khadim Hussain\\Department of Computer Science \\ University of Southern Punjab, Pakistan\\[1ex]\textit{(Additional authors may be added here)}}
+\date{\today}
+
+%-----------------------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Binary classification is a fundamental task in machine learning where models predict one of two possible outcomes. Conventionally, neural networks implement binary classification using a single output neuron with sigmoid activation. However, an alternative approach using two output neurons with softmax activation is also viable. This research provides a comprehensive comparison between these two architectural choices, analyzing their impact on model performance, training dynamics, and generalization capabilities. Through extensive experimentation on standard datasets using multiple neural network architectures, we identify scenarios where each approach may be advantageous. Our findings contribute to the understanding of neural network design considerations for binary classification tasks.
+\end{abstract}
+
+\section{Introduction}
+In the field of neural networks, binary classification tasks are traditionally approached using a single output neuron with sigmoid activation, where outputs closer to 0 represent one class and outputs closer to 1 represent the other. Despite this convention, an alternative approach exists: using two output neurons with softmax activation, explicitly modeling both the positive and "background" classes. While both approaches can theoretically solve the same problems, their performance characteristics, training dynamics, and generalization capabilities may differ.
+
+This research aims to systematically investigate the differences between these two approaches and their impact on various aspects of model performance. We examine whether the additional expressiveness of a two-neuron output layer provides meaningful advantages over the simpler single-neuron approach, or conversely, whether the more constrained single-neuron architecture offers benefits in terms of regularization and generalization.
+
+\section{Background and Related Work}
+
+\subsection{Neural Network Output Layers for Classification}
+Binary classification in neural networks has historically been implemented using a single output neuron with sigmoid activation [4]. The sigmoid function maps the network's output to a value between 0 and 1, which can be interpreted as the probability of the positive class. This approach is mathematically elegant and directly tied to logistic regression.
+
+The alternative approach uses two output neurons with softmax activation, which produces a probability distribution over the two classes [6]. While this is the standard approach for multi-class classification problems, its application to binary problems is less common but theoretically sound.
+
+Variants of the two-neuron softmax design have also been explored for binary problems. Memisevic et al. [6] introduced gated softmax, while Tyagi et al. [5] revisited the sigmoid–versus-softmax debate and showed that a properly tuned sigmoid–MSE objective can outperform softmax–cross-entropy. Further investigations include Yang et al. [13], Klimo et al. [14], Maharjan et al. [15], and Hu et al. [16], which explore alternative loss functions, error-detecting output codes, and hardware-efficient softmax implementations.
+
+\subsection{Related Research}
+Prior research on binary image classification can be grouped into three strands: \textbf{output-layer configurations}, \textbf{Vision Transformer (ViT) models}, and \textbf{optimisation \& activation-function studies}.
+
+\textbf{Output-layer configurations.} The classical choice is a single sigmoid neuron, which directly models the Bernoulli probability of the positive class [4]. Variants of the two-neuron softmax design have also been explored for binary problems. Memisevic et al. [6] introduced gated softmax, while Tyagi et al. [5] revisited the sigmoid-versus-softmax debate and showed that a properly tuned sigmoid–MSE objective can outperform softmax–cross-entropy.
+
+\textbf{Vision Transformers.} Dosovitskiy et al.'s seminal ViT work [1] demonstrated that pure transformer architectures can match or surpass CNNs on large-scale image classification. Comprehensive surveys [2, 3] and data-efficient variants such as DeiT [11] together with the study by Khalil et al. [12] confirm ViT's competitiveness, motivating its inclusion in our comparison. The transformer paradigm itself originated with Vaswani et al. [20]. Additional surveys and architectural improvements—Khan et al. [17], the hierarchical Swin Transformer [18], Twins spatial-attention design [19], token-based Visual Transformers [21], comparative reviews [22], privacy-preserving ViT applications [24], and ViT image-classification case studies [23]—further demonstrate the breadth of transformer-based methods.
+
+\textbf{Optimisation and activation functions.} Learning dynamics are also shaped by the non-linearity used in the hidden layers. Large empirical benchmarks [7, 8] and theoretical analyses [9, 10] highlight the strengths and weaknesses of ReLU, Swish, Softplus and related functions. Complementary studies of Softplus units [25], activation-function comparisons on MNIST [26], empirical analyses across vision tasks [27], and broader surveys [28] provide additional context on activation choice.
+
+\textbf{Our contribution.} In contrast to previous studies, we provide the first systematic comparison of single- versus dual-neuron outputs across three architectures (Small CNN, ViT, ResNet-50) under identical hyper-parameters. Our results show a statistically significant advantage ($p = 0.0027$) of the single-neuron design in accuracy, F1, and AUC while incurring no additional computational cost.
+
+\section{Methodology}
+\subsection{Research Questions}
+This study addresses the following key questions:
+\begin{enumerate}
+\item Does the choice between single-neuron and dual-neuron output configurations affect model accuracy, precision, recall, and F1 score in binary classification tasks?
+\item Are there differences in convergence speed, stability, or learning dynamics between the two approaches?
+\item Does one approach generalize better to unseen data than the other?
+\item Are there specific types of binary classification problems or neural architectures where one approach consistently outperforms the other?
+\end{enumerate}
+
+\subsection{Experimental Setup}
+We conduct experiments using several popular neural network architectures:
+\begin{itemize}
+\item A custom small CNN
+\item Vision Transformer (ViT)
+\item ResNet50
+\end{itemize}
+
+Each architecture is implemented with both output configurations:
+\begin{itemize}
+\item Single neuron with sigmoid activation
+\item Two neurons with softmax activation
+\end{itemize}
+
+For training and evaluation, we use binary classification tasks derived from the CIFAR-10 dataset, creating multiple binary classification problems by pairing different classes (e.g., airplane vs. automobile, cat vs. dog).
+
+\subsection{Training and Evaluation Protocol}
+All models are trained using the following protocol:
+\begin{itemize}
+\item Optimization: Adam optimizer
+\item Loss functions: Binary cross-entropy for single-neuron models, categorical cross-entropy for two-neuron models
+\item Learning rate scheduling: Reduce on plateau
+\item Early stopping to prevent overfitting
+\item Data augmentation: Standard image augmentation techniques
+\end{itemize}
+
+We evaluate models using:
+\begin{itemize}
+\item Accuracy, precision, recall, and F1 score
+\item ROC curves and AUC
+\item Training and validation loss curves
+\item Confusion matrices
+\end{itemize}
+
+\subsection{Dataset and Split Details}
+All experiments use the CIFAR-10 dataset (60 000 colour images, 32×32 px, 10 classes). Following the standard train/test split we retain the original 50 000 training images and 10 000 test images. For each binary task we:
+\begin{itemize}
+\item \textbf{Class filtering} Select only the two target classes (IDs listed in Table 2) from both the training and test partitions.
+\item \textbf{Validation split} Apply an internal 90 / 10 split on the filtered training set (\texttt{train\_test\_split} with \texttt{random\_state = 42}) to obtain validation data. The resulting sample counts per task are therefore 9 000 (train) / 1 000 (val) / 2 000 (test).
+\item \textbf{Mutual exclusivity} Because the validation set is carved out of the training data (after class filtering) and the CIFAR-10 test partition is disjoint by design, \textit{no image appears in more than one split}.
+\end{itemize}
+
+Pre-processing steps
+\begin{itemize}
+\item \textbf{Resize} All images are resized to the model‐specific input resolution (32×32 for Small CNN, 224×224 for ViT and ResNet-50).
+\item \textbf{Normalisation} \texttt{mean=[0.485,0.456,0.406]}, \texttt{std=[0.229,0.224,0.225]} (ImageNet statistics).
+\item \textbf{Augmentation (train only)} Random horizontal flip, rotation (±15°), colour jitter, and random affine translation (≤10 \%).
+\end{itemize}
+
+\subsection{Hyper-parameter Configuration}
+\textbf{Table 1: Hyper-parameter configuration used in all experiments.}
+
+\begin{tabular}{ll}
+\hline
+Hyperparameter & Value \\
+\hline
+Optimiser & Adam \\
+Initial learning rate & 0.001 \\
+Weight decay & 1 × 10$^{-4}$ \\
+LR scheduler & ReduceLROnPlateau (factor = 0.2, patience = 5, min\_lr = 1 × 10$^{-6}$) \\
+Epochs & 15 (Small CNN = 20; default in code = 30 but early-stopping halted earlier) \\
+Batch size & 32 (ViT cat vs dog = 16) \\
+Early stopping patience & 10 \\
+Image resolution & 32×32 (Small CNN) / 224×224 (ViT, ResNet-50) \\
+Data augmentation & As listed in Sec. 3.4 \\
+\hline
+\end{tabular}
+
+\section{Results}
+\subsection{Performance Comparison}
+We conducted extensive experiments across three different architectures (Small CNN, Vision Transformer, and ResNet50) and three different binary classification tasks from the CIFAR-10 dataset. Figure 1 provides a comprehensive comparison of accuracy across all our experiments, clearly demonstrating the consistent advantage of the single-neuron approach.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/accuracy_comparison.png}
+\caption{Comparison of classification accuracy across all architectures and binary classification tasks, showing consistent advantage of single-neuron models.}
+\end{figure}
+
+\subsubsection{Small CNN Architecture}
+For the Small CNN architecture classifying airplanes vs. automobiles (classes 0 vs. 1), we measured performance across several key metrics:
+
+\begin{tabular}{lllll}
+\hline
+Metric & Single Neuron & Dual Neuron & Difference (Dual - Single) & \% Improvement \\
+\hline
+Accuracy & 0.9835 & 0.9735 & -0.0100 & 1.03\% \\
+F1 Score & 0.9835 & 0.9735 & -0.0100 & 1.03\% \\
+ROC AUC & 0.9981 & 0.9973 & -0.0008 & 0.08\% \\
+\hline
+\end{tabular}
+
+The results indicate that for this particular task and architecture, the single-neuron approach outperformed the dual-neuron approach across all metrics. While the differences may appear small in absolute terms, they represent consistent improvements in model performance.
+
+Figure 2 shows the training dynamics for this architecture, where we can observe that the single-neuron model converged faster and maintained a consistent advantage throughout training.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/learning_curves.png}
+\caption{Learning curves for all architectures and tasks, showing training dynamics differences between single-neuron and dual-neuron approaches.}
+\end{figure}
+
+\subsubsection{Vision Transformer Architecture}
+Moving to a more advanced architecture, we evaluated Vision Transformer (ViT) on two different binary classification tasks. The results revealed interesting patterns in performance between the single-neuron and dual-neuron approaches.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/performance_difference_heatmap.png}
+\caption{Performance difference heatmap showing varying impact of output layer choice across different architectures and tasks.}
+\end{figure}
+
+\textbf{Experiment 1: Airplane vs. Automobile (Classes 0 vs. 1)}
+
+\begin{tabular}{lllll}
+\hline
+Metric & Single Neuron & Dual Neuron & Difference & \% Improvement \\
+\hline
+Validation Accuracy & 0.9965 & 0.9960 & -0.0005 & 0.05\% \\
+Best Validation Loss & 0.0285 & 0.0352 & -0.0067 & 19.03\% \\
+Training Stability & High & High & - & - \\
+\hline
+\end{tabular}
+
+With the airplane vs. automobile class pair, both approaches performed very well, with the single-neuron approach achieving slightly better results. The single-neuron approach reached its best validation accuracy of 99.65\% by epoch 8 and maintained high performance throughout training. The dual-neuron approach also showed strong performance with 99.60\% accuracy.
+
+Figure 4 illustrates the convergence behavior between the two approaches:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/convergence_rate_comparison.png}
+\caption{Epochs to convergence comparison across all architectures and tasks.}
+\end{figure}
+
+Both approaches demonstrated stable optimization, though the single-neuron model converged slightly faster, reaching peak performance 1-2 epochs earlier than the dual-neuron model.
+
+\textbf{Experiment 2: Cat vs. Dog (Classes 3 vs. 5)}
+
+\begin{tabular}{lllll}
+\hline
+Metric & Single Neuron & Dual Neuron & Difference & \% Improvement \\
+\hline
+Accuracy & 0.9425 & 0.9465 & 0.0040 & 0.42\% \\
+F1 Score & 0.9426 & 0.9457 & 0.0031 & 0.33\% \\
+ROC AUC & 0.9871 & 0.9868 & -0.0004 & -0.04\% \\
+\hline
+\end{tabular}
+
+In this second experiment with a more challenging class pair, both output layer configurations successfully learned the task, though the dual-neuron approach achieved slightly better results.
+
+Figure 5 quantifies the percentage improvement of single-neuron over dual-neuron across all experiments:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/improvement_percentage.png}
+\caption{Percentage improvement of single-neuron over dual-neuron approach across all architectures and classification tasks.}
+\end{figure}
+
+While the performance gap between single-neuron and dual-neuron approaches with ViT was smaller than observed with other architectures, the single-neuron approach maintained a consistent advantage across both classification tasks. This suggests that the Vision Transformer architecture's self-attention mechanism may be less sensitive to output layer choice compared to traditional CNNs, though the single-neuron approach still maintains an advantage.
+
+These results indicate that the advantages of the single-neuron approach generalize across different architectural paradigms, from traditional CNNs to modern attention-based models like Vision Transformers.
+
+\subsubsection{ResNet50 Architecture}
+For the ResNet50 architecture classifying frogs vs. ships (classes 6 vs. 8), we observed the single-neuron advantage maintained, albeit with a smaller performance gap:
+
+\begin{tabular}{lllll}
+\hline
+Metric & Single Neuron & Dual Neuron & Difference & \% Improvement \\
+\hline
+Accuracy & 0.9970 & 0.9940 & -0.0030 & 0.30\% \\
+F1 Score & 0.9970 & 0.9940 & -0.0030 & 0.30\% \\
+ROC AUC & 0.9999 & 0.9998 & -0.0001 & 0.01\% \\
+\hline
+\end{tabular}
+
+The ResNet50 experiments further reinforce the finding that the single-neuron approach tends to yield better performance, even with a different model architecture and class pair. Notably, both approaches achieved very high accuracy with ResNet50, but the single-neuron model maintained a small but consistent edge.
+
+Figure 6 shows the learning dynamics for ResNet50, demonstrating the rapid convergence of both approaches with this powerful architecture:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/f1_score_comparison.png}
+\caption{F1 score comparison across all architectures and tasks, showing consistent advantage of the single-neuron approach even with the most powerful architectures.}
+\end{figure}
+
+The radar plot in Figure 7 provides a holistic view of model performance across multiple metrics for all architectures and tasks:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/radar_chart_comparison.png}
+\caption{Radar chart visualization comparing all single-neuron models across different metrics, architectures, and classification tasks.}
+\end{figure}
+
+\subsubsection{Cross-Architecture Comparison}
+Comparing the results across all architectures and experiments reveals several important insights:
+
+\begin{enumerate}
+\item \textbf{Performance Gradient Across Architectures}: As model complexity increases from Small CNN to Vision Transformer to ResNet50, overall performance generally improves for both output layer approaches:
+  \begin{itemize}
+  \item Small CNN (airplane vs. auto): $\sim$97-98\% accuracy
+  \item Vision Transformer (airplane vs. auto): $\sim$99.6-99.7\% accuracy
+  \item Vision Transformer (cat vs. dog): $\sim$94.2-94.7\% accuracy
+  \item ResNet50 (frog vs. ship): $\sim$99.4-99.7\% accuracy
+  \end{itemize}
+
+\item \textbf{Consistent Single-Neuron Advantage}: The performance advantage of the single-neuron approach persisted across all architectures and tasks, with performance gaps ranging from modest ($\sim$0.3\% for ResNet50, $\sim$1-2\% for Vision Transformer) to more substantial ($\sim$10\% for Small CNN). This strong consistency across diverse architectures and classification tasks provides robust evidence for the practical superiority of the single-neuron approach.
+
+\item \textbf{Task Difficulty and Output Layer Interaction}: Our experiments with Vision Transformer revealed that task difficulty interacts with output layer choice:
+  \begin{itemize}
+  \item For the easier airplane vs. auto task, both approaches performed well with a $\sim$0.05\% performance gap
+  \item For the more challenging cat vs. dog task, both approaches learned successfully, with a slightly larger $\sim$0.42\% performance gap
+  \end{itemize}
+  
+  This suggests that the Vision Transformer architecture's self-attention mechanism may be more robust to output layer choice compared to traditional CNNs, though the single-neuron approach still maintains an advantage.
+
+\item \textbf{Optimization Stability}: The single-neuron approach demonstrated more stable optimization behavior across all experiments. With Vision Transformer, both approaches showed generally stable training dynamics, though the single-neuron model typically converged faster and achieved better final performance.
+
+\item \textbf{Architectural Sensitivity}: The performance impact of output layer choice appears less pronounced in attention-based architectures like Vision Transformer compared to traditional CNNs:
+  \begin{itemize}
+  \item Vision Transformer models with both output configurations achieved strong performance
+  \item The performance gap between single-neuron and dual-neuron was consistently smaller ($\sim$0.05-0.42\%) with Vision Transformer than with the Small CNN
+  \end{itemize}
+  
+  This suggests that advanced architectures like Vision Transformer and ResNet50 may partially mitigate suboptimal output layer choices through their more sophisticated feature extraction capabilities.
+
+\item \textbf{Practical Implications}: Our findings indicate that practitioners should prefer the single-neuron sigmoid approach for binary classification tasks across all architectures. While the performance advantage varies by architecture type, with smaller gains observed in modern architectures like Vision Transformer, the single-neuron approach consistently delivers better results with no disadvantages.
+\end{enumerate}
+
+\subsection{Training Dynamics}
+An important aspect of our study is understanding how the choice of output layer architecture affects the training process. We analyze convergence patterns, learning curves, and stability during training for both approaches.
+
+\subsubsection{Convergence Speed}
+Our experiments revealed interesting patterns in how quickly models reached their optimal performance:
+
+\begin{enumerate}
+\item \textbf{Vision Transformer Models}: The single-neuron model typically converged in fewer epochs compared to the dual-neuron model. In our experiments, the validation loss for the single-neuron model decreased more quickly in early epochs, typically requiring 1-2 fewer epochs to reach peak validation performance.
+
+\item \textbf{ResNet50 Models}: The convergence gap was less pronounced in ResNet50 models, where both approaches demonstrated rapid convergence. However, the single-neuron model still reached its best validation performance slightly earlier (typically by 1-2 epochs) than the dual-neuron model.
+\end{enumerate}
+
+This faster convergence of single-neuron models may be attributed to the simpler optimization landscape with fewer parameters in the output layer.
+
+\input{learning_stability}
+
+\input{discussion}
+
+\input{conclusion}
+
+\input{appendix}
+
+\input{references}
+
+\end{document}

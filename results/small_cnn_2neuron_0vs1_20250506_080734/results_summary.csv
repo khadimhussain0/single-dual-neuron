@@ -1,0 +1,2 @@
+Model,Output_Neurons,Classes,Test_Accuracy,Test_Precision,Test_Recall,F1_Score,ROC_AUC
+small_cnn,2,0vs1,0.9735,0.973973973973974,0.973,0.9734867433716858,0.9973145000000001

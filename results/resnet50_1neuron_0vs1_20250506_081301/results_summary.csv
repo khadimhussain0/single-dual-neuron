@@ -1,0 +1,2 @@
+Model,Output_Neurons,Classes,Test_Accuracy,Test_Precision,Test_Recall,F1_Score,ROC_AUC
+resnet50,1,0vs1,0.9965,0.9989949748743718,0.994,0.9964912280701754,0.999893
