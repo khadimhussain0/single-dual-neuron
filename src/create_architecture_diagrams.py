@@ -387,70 +387,66 @@ def create_resnet_diagram(output_neurons=1):
 
 def create_vit_diagram(output_neurons=1):
     """Create an enhanced diagram for the Vision Transformer architecture"""
-    fig, ax = plt.subplots(figsize=(16, 12))
-    
-    # Set up the plot with more space
+    # Create a much larger figure for the ViT architecture with clear separation
+    fig, ax = plt.subplots(figsize=(16, 16))  # Drastically increased height
     ax.set_xlim(0, 16)
-    ax.set_ylim(0, 12)
+    ax.set_ylim(0, 16)  # Drastically increased ylim
     ax.axis('off')
     
     # Title with more descriptive information
-    output_type = "Single-Neuron" if output_neurons == 1 else "Dual-Neuron"
-    ax.set_title(f'Vision Transformer (ViT) Architecture with {output_type} Output Layer', fontsize=16, fontweight='bold')
-    
-    # Add subtitle with parameter information
     if output_neurons == 1:
+        title = "Vision Transformer (ViT) Architecture with Single-Neuron Output"
         param_info = "~86M parameters (Single-Neuron Output), ~5.8M trainable"
     else:
+        title = "Vision Transformer (ViT) Architecture with Dual-Neuron Output"
         param_info = "~86M parameters (Dual-Neuron Output), ~5.8M trainable"
-    ax.text(8, 11.5, param_info, fontsize=12, ha='center', va='center', style='italic')
+    ax.text(8, 15, title, fontsize=14, weight='bold', ha='center', va='center')
+    ax.text(8, 14.2, param_info, fontsize=12, ha='center', va='center', style='italic')
     
-    # Input layer with more details
-    draw_box(ax, 0.8, 6.0, 1.2, 1.2, COLORS['input'], 'Input\n224×224×3\nRGB Image', fontsize=10, zorder=3)
-    
-    # Tokenization section
-    token_bg_x = 2.5
-    token_bg_width = 4.0
-    token_bg_height = 1.4
-    token_y = 6.0
-    
-    # Background for tokenization
-    draw_box(ax, token_bg_x, token_y-0.1, token_bg_width, token_bg_height, 
-             '#E8F8F5', None, alpha=0.3, zorder=1, linewidth=1.5, edgecolor='#A3E4D7')
-    ax.text(token_bg_x + 0.2, token_y + 1.1, "Tokenization", fontsize=9, ha='left', va='center', style='italic')
-    
-    # Tokenization components
-    draw_box(ax, 2.7, token_y, 1.2, 1.2, COLORS['conv'], 'Patch\nEmbedding\n16×16 patches\n(196 tokens)', fontsize=9, zorder=3)
-    draw_box(ax, 4.1, token_y, 0.8, 1.2, COLORS['input'], 'Class\nToken\n[CLS]', fontsize=9, zorder=3)
-    draw_box(ax, 5.1, token_y, 1.0, 1.2, COLORS['input'], 'Position\nEmbedding\n(197 positions)', fontsize=9, zorder=3)
-    
-    # Transformer encoder section
+    # Transformer Encoder section - moved up and stacked vertically
     encoder_bg_x = 7.0
-    encoder_bg_width = 4.0
-    encoder_bg_height = 7.0
-    encoder_y = 2.0
+    encoder_bg_width = 3.0
+    encoder_bg_height = 6.0
+    encoder_y = 7.0  # Adjusted for vertical stack
     
     # Background for transformer encoder
-    draw_box(ax, encoder_bg_x, encoder_y, encoder_bg_width, encoder_bg_height, 
-             COLORS['background'], None, alpha=0.3, zorder=1, linewidth=1.5, edgecolor='#D2B4DE')
-    ax.text(encoder_bg_x + 0.2, encoder_y + 6.8, "Transformer Encoder", fontsize=10, ha='left', va='center', style='italic')
+    draw_box(ax, encoder_bg_x, encoder_y-0.1, encoder_bg_width, encoder_bg_height, 
+             '#E8F8F5', None, alpha=0.3, zorder=1, linewidth=1.5, edgecolor='#82E0AA')
+    ax.text(encoder_bg_x + 0.2, encoder_y + 5.7, "Transformer Encoder", 
+            fontsize=10, ha='left', va='center', style='italic')
     
-    # Draw transformer layers inside the encoder box
-    layer_height = 0.45
-    layer_spacing = 0.15
-    layer_width = 3.5
+    # Transformer encoder blocks - stacked vertically
+    block_width = 2.5
+    block_height = 0.4
+    block_spacing = 0.1
+    block_x = encoder_bg_x + 0.25
     
-    # Layer 1-10 (frozen)
-    for i in range(12):
-        y_pos = encoder_y + encoder_bg_height - 0.7 - (i * (layer_height + layer_spacing))
-        draw_box(ax, encoder_bg_x + 0.25, y_pos, layer_width, layer_height, 
-                COLORS['frozen'], f'Encoder Block {i+1}', fontsize=9, zorder=2)
+    # Frozen blocks (1-10)
+    for i in range(10):
+        block_y = encoder_y + 5.0 - (i * (block_height + block_spacing))
+        draw_box(ax, block_x, block_y, block_width, block_height, 
+                COLORS['frozen'], f'Block {i+1}', fontsize=9, zorder=3)
     
-    # MLP Head section
-    head_bg_x = 12.0
+    # Unfrozen blocks (11-12)
+    for i in range(10, 12):
+        block_y = encoder_y + 5.0 - (i * (block_height + block_spacing))
+        draw_box(ax, block_x, block_y, block_width, block_height, 
+                COLORS['unfrozen'], f'Block {i+1}', fontsize=9, zorder=3)
+    
+    # Input and patch embedding section - moved up
+    # Input image
+    draw_box(ax, 1.0, 11.0, 1.0, 1.2, COLORS['input'], 'Input\n224×224×3\nRGB Image', fontsize=10, zorder=3)
+    
+    # Patch embedding process
+    draw_box(ax, 2.7, 11.0, 1.2, 1.2, COLORS['conv'], 'Patch\nEmbedding', fontsize=10, zorder=3)
+    draw_box(ax, 4.1, 11.0, 0.8, 1.2, COLORS['conv'], 'Class\nToken', fontsize=10, zorder=3)
+    draw_box(ax, 5.1, 11.0, 1.0, 1.2, COLORS['conv'], 'Position\nEmbedding', fontsize=10, zorder=3)
+    
+    # MLP Head section - positioned between encoder and classifier
+    head_bg_x = 11.5
     head_bg_width = 1.5
     head_bg_height = 1.6
-    head_y = 6.0
+    head_y = 6.0  # Positioned in the middle
     
     # Background for MLP head
     draw_box(ax, head_bg_x, head_y-0.1, head_bg_width, head_bg_height, 
@@ -460,16 +456,16 @@ def create_vit_diagram(output_neurons=1):
     # MLP Head component
     draw_box(ax, 12.2, head_y, 1.1, 1.4, COLORS['fc'], 'MLP\nHead\n(768→768)', fontsize=10, zorder=3)
     
-    # Custom classifier section
+    # Custom classifier section - moved to bottom of diagram
     classifier_bg_x = 7.0
     classifier_bg_width = 6.0
     classifier_bg_height = 1.6
-    classifier_y = 1.0
+    classifier_y = 2.5  # Positioned much lower in the diagram
     
     # Background for custom classifier
     draw_box(ax, classifier_bg_x, classifier_y-0.1, classifier_bg_width, classifier_bg_height, 
              '#F5EEF8', None, alpha=0.3, zorder=1, linewidth=1.5, edgecolor='#D2B4DE')
-    ax.text(classifier_bg_x + 0.2, classifier_y + 1.3, "Custom Classifier", 
+    ax.text(classifier_bg_x + 0.2, classifier_y + 1.3, "Classifier", 
             fontsize=10, ha='left', va='center', style='italic')
     
     # Output layer (moved to the beginning)
@@ -484,50 +480,50 @@ def create_vit_diagram(output_neurons=1):
     draw_box(ax, 10.6, classifier_y, 0.9, 1.4, COLORS['bn'], 'Batch\nNorm', fontsize=10, zorder=3)
     draw_box(ax, 11.9, classifier_y, 1.1, 1.4, COLORS['fc'], 'FC 256\nReLU', fontsize=10, zorder=3)
 
-    # Arrows connecting components
+    # Arrows connecting components - completely redone for new layout
     # Input to tokenization
-    draw_arrow(ax, (2.0, 6.6), (2.7, 6.6), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (2.0, 11.6), (2.7, 11.6), linewidth=1.8, zorder=2)
     
     # Connect tokenization components
-    draw_arrow(ax, (3.9, 6.6), (4.1, 6.6), linewidth=1.8, zorder=2)
-    draw_arrow(ax, (4.9, 6.6), (5.1, 6.6), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (3.9, 11.6), (4.1, 11.6), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (4.9, 11.6), (5.1, 11.6), linewidth=1.8, zorder=2)
     
     # Connect to transformer encoder
-    draw_arrow(ax, (6.1, 6.6), (6.5, 6.6), linewidth=1.8, zorder=2)
-    draw_arrow(ax, (6.5, 6.6), (6.5, 5.5), linewidth=1.8, zorder=2)
-    draw_arrow(ax, (6.5, 5.5), (7.0, 5.5), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (6.1, 11.6), (6.5, 11.6), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (6.5, 11.6), (6.5, 12.5), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (6.5, 12.5), (7.0, 12.5), linewidth=1.8, zorder=2)
     
     # Connect from transformer to MLP head
-    draw_arrow(ax, (11.0, 5.5), (12.0, 6.6), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (10.0, 10.0), (11.5, 6.6), style='arc3,rad=-0.3', linewidth=1.8, zorder=2)
     
-    # Connect MLP head to custom classifier with proper flow direction
+    # Connect MLP head to custom classifier
     draw_arrow(ax, (13.3, 6.6), (14.0, 6.6), linewidth=1.8, zorder=2)
-    draw_arrow(ax, (14.0, 6.6), (14.0, 1.8), style='arc3,rad=-0.3', linewidth=1.8, zorder=2)
-    draw_arrow(ax, (14.0, 1.8), (7.3, 1.8), style='arc3,rad=0', linewidth=1.8, zorder=2)
+    draw_arrow(ax, (14.0, 6.6), (14.0, 3.3), style='arc3,rad=-0.3', linewidth=1.8, zorder=2)
+    draw_arrow(ax, (14.0, 3.3), (7.3, 3.3), style='arc3,rad=0', linewidth=1.8, zorder=2)
     
-    # Connect classifier components with proper flow direction
-    draw_arrow(ax, (8.4, 1.8), (8.6, 1.8), linewidth=1.8, zorder=2)
-    draw_arrow(ax, (9.5, 1.8), (9.7, 1.8), linewidth=1.8, zorder=2)
-    draw_arrow(ax, (10.8, 1.8), (11.0, 1.8), linewidth=1.8, zorder=2)
-    draw_arrow(ax, (11.9, 1.8), (12.1, 1.8), linewidth=1.8, zorder=2)
+    # Connect classifier components
+    draw_arrow(ax, (8.4, 3.3), (8.6, 3.3), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (9.5, 3.3), (9.7, 3.3), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (10.8, 3.3), (11.0, 3.3), linewidth=1.8, zorder=2)
+    draw_arrow(ax, (11.9, 3.3), (12.1, 3.3), linewidth=1.8, zorder=2)
     
-    # Add details about transformer blocks
-    add_info_box(ax, 3.5, 3.5, "Each Transformer Encoder Block contains:\n- Multi-Head Self-Attention (12 heads)\n- Layer Normalization\n- MLP with GELU activation\n- Residual connections", 
+    # Add details about transformer blocks - repositioned
+    add_info_box(ax, 3.5, 8.5, "Each Transformer Encoder Block contains:\n- Multi-Head Self-Attention (12 heads)\n- Layer Normalization\n- MLP with GELU activation\n- Residual connections", 
                 fontsize=10, color=COLORS['note'], zorder=3)
     
     # Add note about transfer learning
     # add_info_box(ax, 3.5, 9.5, "Transfer Learning Strategy:\n- Freeze first 10 encoder blocks\n- Train only blocks 11-12 and classifier\n- Leverages ImageNet pre-trained weights", 
     #             fontsize=10, color=COLORS['note'], zorder=3)
     
-    # Add note about patch embedding
-    add_info_box(ax, 12.5, 9.5, "Patch Embedding Process:\n- Split 224×224 image into 16×16 patches\n- Flatten patches to 768-dim vectors\n- Add learnable class token [CLS]\n- Add positional embeddings", 
+    # Add note about patch embedding - repositioned
+    add_info_box(ax, 12.5, 13.5, "Patch Embedding Process:\n- Split 224×224 image into 16×16 patches\n- Flatten patches to 768-dim vectors\n- Add learnable class token [CLS]\n- Add positional embeddings", 
                 fontsize=10, color=COLORS['note'], zorder=3)
     
-    # Add note about model architecture
-    add_info_box(ax, 12.5, 3.5, "Vision Transformer (ViT) Architecture:\n- Based on ViT-B/16 model\n- 12 transformer encoder blocks\n- 768-dimensional embeddings\n- 12 attention heads per block\n- 86M total parameters", 
+    # Add note about model architecture - repositioned
+    add_info_box(ax, 3.5, 4.5, "Vision Transformer (ViT) Architecture:\n- Based on ViT-B/16 model\n- 12 transformer encoder blocks\n- 768-dimensional embeddings\n- 12 attention heads per block\n- 86M total parameters", 
                 fontsize=10, color=COLORS['note'], zorder=3)
     
-    # Add legend
+    # Add legend - adjusted position for new figure size
     legend_elements = [
         Rectangle((0, 0), 1, 1, facecolor=COLORS['input'], edgecolor='black', alpha=0.7, label='Input/Embedding'),
         Rectangle((0, 0), 1, 1, facecolor=COLORS['conv'], edgecolor='black', alpha=0.7, label='Patch Embedding'),
@@ -537,7 +533,7 @@ def create_vit_diagram(output_neurons=1):
         Rectangle((0, 0), 1, 1, facecolor=COLORS['bn'], edgecolor='black', alpha=0.7, label='Batch Normalization'),
         Rectangle((0, 0), 1, 1, facecolor=COLORS['output'], edgecolor='black', alpha=0.7, label='Output Layer')
     ]
-    ax.legend(handles=legend_elements, loc='upper center', bbox_to_anchor=(0.5, 0.12),
+    ax.legend(handles=legend_elements, loc='upper center', bbox_to_anchor=(0.5, 0.05),
               ncol=4, fontsize=10)
     
     plt.tight_layout()
