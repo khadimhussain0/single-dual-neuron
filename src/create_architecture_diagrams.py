@@ -118,7 +118,11 @@ def create_small_cnn_diagram(output_neurons=1):
     draw_box(ax, 12.6, block2_y, 0.9, 1.2, COLORS['pool'], 'MaxPool\n2×2\n8×8', fontsize=9, zorder=3)
     
     # Third convolutional block (shown as a note)
-    add_info_box(ax, 7, 6, "Block 3: 128 Filters\n- Conv2D 3×3, 128, ReLU\n- Batch Normalization\n- Conv2D 3×3, 128, ReLU\n- Batch Normalization\n- MaxPool 2×2 → 4×4\n- Dropout 0.3", 
+    add_info_box(ax, 5, 6, "Block 3: 128 Filters\n- Conv2D 3×3, 128, ReLU\n- Batch Normalization\n- Conv2D 3×3, 128, ReLU\n- Batch Normalization\n- MaxPool 2×2 → 4×4\n- Dropout 0.3", 
+                fontsize=9, color=COLORS['note'])
+    
+    # Add dimension information (moved to top of diagram)
+    add_info_box(ax, 9, 6, "Feature Dimensions:\n- Input: 32×32×3\n- After Block 1: 16×16×32\n- After Block 2: 8×8×64\n- After Block 3: 4×4×128\n- Flattened: 2048 features", 
                 fontsize=9, color=COLORS['note'])
     
     # Fully connected layers
@@ -143,9 +147,7 @@ def create_small_cnn_diagram(output_neurons=1):
     draw_box(ax, 5.0, fc_y, 0.8, 1.2, COLORS['bn'], 'Batch\nNorm', fontsize=9, zorder=3)
     draw_box(ax, 6.1, fc_y, 1.8, 1.2, COLORS['fc'], 'Flatten\n→ FC 256\nReLU', fontsize=9, zorder=3)
 
-    # Add dimension information
-    add_info_box(ax, 11, 2.5, "Feature Dimensions:\n- Input: 32×32×3\n- After Block 1: 16×16×32\n- After Block 2: 8×8×64\n- After Block 3: 4×4×128\n- Flattened: 2048 features", 
-                fontsize=9, color=COLORS['note'])
+    # Feature dimensions information moved to top of diagram
     
     # Arrows connecting components - Block 1
     draw_arrow(ax, (1.7, 4.6), (2.2, 4.6), linewidth=1.5, zorder=2)
@@ -286,6 +288,10 @@ def create_resnet_diagram(output_neurons=1):
     add_info_box(ax, 3.5, 7.5, "Bottleneck Block Structure:\n1. 1×1 Conv (reduce channels)\n2. 3×3 Conv\n3. 1×1 Conv (increase channels)\n4. Add input (residual connection)\n5. ReLU activation", 
                 fontsize=9, color=COLORS['note'])
     
+    # Add residual block description (moved to top between other info boxes)
+    add_info_box(ax, 7.0, 7.5, "Each residual block contains:\n1×1 conv → 3×3 conv → 1×1 conv\nwith batch normalization and ReLU", 
+                fontsize=9, color=COLORS['note'])
+    
     # Add feature map sizes
     add_info_box(ax, 10.5, 7.5, "Feature Map Dimensions:\n- Input: 224×224×3\n- After Stem: 56×56×64\n- After Layer 1: 56×56×256\n- After Layer 2: 28×28×512\n- After Layer 3: 14×14×1024\n- After Layer 4: 7×7×2048", 
                 fontsize=9, color=COLORS['note'])
@@ -353,10 +359,7 @@ def create_resnet_diagram(output_neurons=1):
     draw_arrow(ax, (10, 3.2), (10.2, 3), color='red', style='arc3,rad=0.3')
     draw_arrow(ax, (11, 3), (11.2, 3.2), color='red', style='arc3,rad=0.3')
     
-    # Add a note about residual blocks
-    ax.text(8, 5.5, "Each residual block contains:\n1×1 conv → 3×3 conv → 1×1 conv\nwith batch normalization and ReLU", 
-            ha='center', va='center', fontsize=9, style='italic',
-            bbox=dict(facecolor='white', alpha=0.7, boxstyle='round,pad=0.5'))
+    # Removed the overlapping note about residual blocks (moved to top of diagram)
     
     # Add a note about transfer learning
     # ax.text(3, 6.5, "Transfer Learning Strategy:\nFreeze all layers except Layer 4 and classifier", 
@@ -396,10 +399,10 @@ def create_vit_diagram(output_neurons=1):
     # Title with more descriptive information
     if output_neurons == 1:
         title = "Vision Transformer (ViT) Architecture with Single-Neuron Output"
-        param_info = "~86M parameters (Single-Neuron Output), ~5.8M trainable"
+        param_info = "~86M parameters (Single-Neuron Output)       ViT-B/16"
     else:
         title = "Vision Transformer (ViT) Architecture with Dual-Neuron Output"
-        param_info = "~86M parameters (Dual-Neuron Output), ~5.8M trainable"
+        param_info = "~86M parameters (Dual-Neuron Output)       ViT-B/16"
     ax.text(8, 15, title, fontsize=14, weight='bold', ha='center', va='center')
     ax.text(8, 14.2, param_info, fontsize=12, ha='center', va='center', style='italic')
     
@@ -511,17 +514,17 @@ def create_vit_diagram(output_neurons=1):
     add_info_box(ax, 3.5, 8.5, "Each Transformer Encoder Block contains:\n- Multi-Head Self-Attention (12 heads)\n- Layer Normalization\n- MLP with GELU activation\n- Residual connections", 
                 fontsize=10, color=COLORS['note'], zorder=3)
     
-    # Add note about transfer learning
-    # add_info_box(ax, 3.5, 9.5, "Transfer Learning Strategy:\n- Freeze first 10 encoder blocks\n- Train only blocks 11-12 and classifier\n- Leverages ImageNet pre-trained weights", 
-    #             fontsize=10, color=COLORS['note'], zorder=3)
-    
-    # Add note about patch embedding - repositioned
-    add_info_box(ax, 12.5, 13.5, "Patch Embedding Process:\n- Split 224×224 image into 16×16 patches\n- Flatten patches to 768-dim vectors\n- Add learnable class token [CLS]\n- Add positional embeddings", 
+    # Add note about patch embedding - moved near other info boxes
+    add_info_box(ax, 3.5, 6.5, "Patch Embedding Process:\n- Split 224×224 image into 16×16 patches\n- Flatten patches to 768-dim vectors\n- Add learnable class token [CLS]\n- Add positional embeddings", 
                 fontsize=10, color=COLORS['note'], zorder=3)
     
     # Add note about model architecture - repositioned
     add_info_box(ax, 3.5, 4.5, "Vision Transformer (ViT) Architecture:\n- Based on ViT-B/16 model\n- 12 transformer encoder blocks\n- 768-dimensional embeddings\n- 12 attention heads per block\n- 86M total parameters", 
                 fontsize=10, color=COLORS['note'], zorder=3)
+    
+    # Add note about transfer learning
+    # add_info_box(ax, 3.5, 9.5, "Transfer Learning Strategy:\n- Freeze first 10 encoder blocks\n- Train only blocks 11-12 and classifier\n- Leverages ImageNet pre-trained weights", 
+    #             fontsize=10, color=COLORS['note'], zorder=3)
     
     # Add legend - adjusted position for new figure size
     legend_elements = [
