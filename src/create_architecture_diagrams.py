@@ -399,10 +399,10 @@ def create_vit_diagram(output_neurons=1):
     # Title with more descriptive information
     if output_neurons == 1:
         title = "Vision Transformer (ViT) Architecture with Single-Neuron Output"
-        param_info = "~86M parameters (Single-Neuron Output)       ViT-B/16"
+        param_info = "~86M parameters (Single-Neuron Output)        ViT-B/16"
     else:
         title = "Vision Transformer (ViT) Architecture with Dual-Neuron Output"
-        param_info = "~86M parameters (Dual-Neuron Output)       ViT-B/16"
+        param_info = "~86M parameters (Dual-Neuron Output)        ViT-B/16"
     ax.text(8, 15, title, fontsize=14, weight='bold', ha='center', va='center')
     ax.text(8, 14.2, param_info, fontsize=12, ha='center', va='center', style='italic')
     
