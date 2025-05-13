@@ -238,7 +238,29 @@ Our experiments revealed interesting patterns in how quickly models reached thei
 
 This faster convergence of single-neuron models may be attributed to the simpler optimization landscape with fewer parameters in the output layer.
 
-#### 4.2.2 Learning Stability
+#### 4.2.2 Model Parameter Analysis
+
+An important consideration when comparing neural network architectures is the number of trainable parameters, which directly impacts model complexity, memory requirements, and computational demands. We analyzed the parameter counts for each model architecture with both single-neuron and dual-neuron output configurations.
+
+![Parameter Count Comparison](figures/parameter_count_comparison.png)
+*Figure 8: Comparison of trainable parameter counts across model architectures with single-neuron and dual-neuron output layers. The difference between configurations is minimal relative to total parameter count.*
+
+Figure 8 illustrates the parameter counts for each architecture. As expected, the Vision Transformer (ViT) and ResNet50 models have significantly more parameters than the Small CNN architecture due to their deeper and more complex structures. However, the difference in parameter count between single-neuron and dual-neuron configurations is remarkably small for all architectures:
+
+- **Small CNN**: The dual-neuron configuration adds only 257 additional parameters (0.03% increase) compared to the single-neuron model.
+- **ResNet50**: The dual-neuron configuration adds only 129 additional parameters (0.0008% increase).
+- **Vision Transformer**: The dual-neuron configuration adds only 129 additional parameters (0.06% increase).
+
+![Parameter Increase Percentage](figures/parameter_increase_percentage.png)
+*Figure 9: Percentage increase in parameters when using dual-neuron output layer compared to single-neuron configuration. The increase is negligible across all architectures.*
+
+Figure 9 shows the percentage increase in parameters when switching from a single-neuron to a dual-neuron output layer. This analysis reveals that the parameter count difference between the two approaches is negligible relative to the total model size, with increases of less than 0.1% across all architectures.
+
+This finding is significant because it demonstrates that the performance differences observed between single-neuron and dual-neuron configurations cannot be attributed to model capacity or complexity. With nearly identical parameter counts, the performance variations must instead stem from fundamental differences in how these output layer configurations learn and generalize, rather than from having more or fewer parameters to optimize.
+
+The minimal parameter difference also indicates that computational resource considerations should not be a deciding factor when choosing between these output layer configurations. Instead, the choice should be based on performance characteristics, training dynamics, and generalization capabilities as discussed in previous sections.
+
+#### 4.2.3 Learning Stability
 
 We observed differences in the stability of the learning process between the two approaches:
 
