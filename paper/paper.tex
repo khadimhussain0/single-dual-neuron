@@ -119,6 +119,18 @@ All experiments use the CIFAR-10 dataset (60 000 colour images, 32×32 px, 10 cl
 \item \textbf{Mutual exclusivity} Because the validation set is carved out of the training data (after class filtering) and the CIFAR-10 test partition is disjoint by design, \textit{no image appears in more than one split}.
 \end{itemize}
 
+\textbf{Table 2: Binary classification tasks used in our experiments.}
+
+\begin{tabular}{lll}
+\hline
+Task ID & Class Pair & CIFAR-10 Class IDs \\
+\hline
+1 & Airplane vs. Automobile & 0 vs. 1 \\
+2 & Cat vs. Dog & 3 vs. 5 \\
+3 & Frog vs. Ship & 6 vs. 8 \\
+\hline
+\end{tabular}
+
 Pre-processing steps
 \begin{itemize}
 \item \textbf{Resize} All images are resized to the model‐specific input resolution (32×32 for Small CNN, 224×224 for ViT and ResNet-50).
@@ -181,7 +193,7 @@ Figure 2 shows the training dynamics for this architecture, where we can observe
 \end{figure}
 
 \subsubsection{Vision Transformer Architecture}
-Moving to a more advanced architecture, we evaluated Vision Transformer (ViT) on two different binary classification tasks. The results revealed interesting patterns in performance between the single-neuron and dual-neuron approaches.
+Moving to a more advanced architecture, we evaluated Vision Transformer (ViT) on two different binary classification tasks. The results revealed interesting patterns in performance between the single-neuron and dual-neuron approaches. Figure 3 shows a heatmap of performance differences across architectures and tasks.
 
 \begin{figure}[htbp]
 \centering
