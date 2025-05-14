@@ -6,16 +6,16 @@ To provide a comprehensive understanding of the neural network architectures use
 
 Our custom Small CNN architecture represents a lightweight convolutional neural network designed specifically for this research. Figures~\ref{fig:small_cnn_arch_single} and \ref{fig:small_cnn_arch_dual} illustrate its structure with single-neuron and dual-neuron output configurations, respectively.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/small_cnn_1neuron_architecture.png}
+\includegraphics[width=0.9\textwidth]{figures/small_cnn_1neuron_architecture.png}
 \caption{Small CNN architecture with single-neuron output layer. The network consists of three convolutional blocks followed by fully connected layers and a single sigmoid output neuron.}
 \label{fig:small_cnn_arch_single}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/small_cnn_2neuron_architecture.png}
+\includegraphics[width=0.9\textwidth]{figures/small_cnn_2neuron_architecture.png}
 \caption{Small CNN architecture with dual-neuron output layer. The network maintains the same structure as the single-neuron variant but uses two output neurons with softmax activation.}
 \label{fig:small_cnn_arch_dual}
 \end{figure}
@@ -29,20 +29,21 @@ The Small CNN architecture features:
 
 This architecture provides a baseline model with approximately 813,000 parameters, all of which are trainable during our experiments.
 
+\FloatBarrier
 \subsubsection{ResNet50 Architecture}
 
 For our second architecture, we employed the ResNet50 model with transfer learning. Figures~\ref{fig:resnet50_arch_single} and \ref{fig:resnet50_arch_dual} show the architecture with its characteristic residual connections for both output configurations.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/resnet50_1neuron_architecture.png}
+\includegraphics[width=0.9\textwidth]{figures/resnet50_1neuron_architecture.png}
 \caption{ResNet50 architecture with single-neuron output layer. The model utilizes pre-trained weights from ImageNet, with only the final residual block and classifier layers fine-tuned for our binary classification tasks.}
 \label{fig:resnet50_arch_single}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/resnet50_2neuron_architecture.png}
+\includegraphics[width=0.9\textwidth]{figures/resnet50_2neuron_architecture.png}
 \caption{ResNet50 architecture with dual-neuron output layer. The model maintains the same structure as the single-neuron variant but uses two output neurons with softmax activation.}
 \label{fig:resnet50_arch_dual}
 \end{figure}
@@ -57,20 +58,21 @@ Key features of our ResNet50 implementation include:
 
 The ResNet50 model contains approximately 24.6 million total parameters, with 16.1 million of those being trainable in our transfer learning setup.
 
+\FloatBarrier
 \subsubsection{Vision Transformer (ViT) Architecture}
 
 Our third architecture is the Vision Transformer (ViT), which represents the attention-based paradigm in computer vision. Figures~\ref{fig:vit_arch_single} and \ref{fig:vit_arch_dual} illustrate the ViT architecture with its distinctive transformer encoder blocks for both output configurations.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/vit_1neuron_architecture.png}
+\includegraphics[width=0.9\textwidth]{figures/vit_1neuron_architecture.png}
 \caption{Vision Transformer (ViT) architecture with single-neuron output layer. The model divides the input image into patches, processes them through transformer encoder blocks, and uses the class token representation for classification.}
 \label{fig:vit_arch_single}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/vit_2neuron_architecture.png}
+\includegraphics[width=0.9\textwidth]{figures/vit_2neuron_architecture.png}
 \caption{Vision Transformer (ViT) architecture with dual-neuron output layer. The model maintains the same structure as the single-neuron variant but uses two output neurons with softmax activation.}
 \label{fig:vit_arch_dual}
 \end{figure}
@@ -87,6 +89,7 @@ The ViT architecture features:
 
 The ViT model is the largest in our study with approximately 86 million total parameters, though only about 230,000 of these are trainable due to our transfer learning approach.
 
+\FloatBarrier
 \subsubsection{Output Layer Configurations}
 
 As shown in Figures \ref{fig:small_cnn_arch_single}--\ref{fig:vit_arch_dual}, for each architecture, we implemented two output layer configurations:
