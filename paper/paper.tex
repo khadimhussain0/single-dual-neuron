@@ -41,42 +41,42 @@
 \maketitle
 
 \begin{abstract}
-Binary classification is a fundamental task in machine learning where models predict one of two possible outcomes. Conventionally, neural networks implement binary classification using a single output neuron with sigmoid activation. However, an alternative approach using two output neurons with softmax activation is also viable. This research provides a comprehensive comparison between these two architectural choices, analyzing their impact on model performance, training dynamics, and generalization capabilities. Through extensive experimentation on standard datasets using multiple neural network architectures, we identify scenarios where each approach may be advantageous. Our findings contribute to the understanding of neural network design considerations for binary classification tasks.
+Binary classification is a classic problem in machine learning: given an input, the model predicts one of two outcomes. In binary classification, neural networks have traditionally implemented a single-output neuron with sigmoid activation. However, an equally valid alternative is to assign two output neurons with a softmax activation function. This study extensively compares the two architectural options with respect to their effect on the performance of models, their training dynamics, and generalization capabilities. From extensive experimentation on benchmark datasets across diverse neural network architectures, we probe under what conditions each approach might find favor. These observations add to knowledge with respect to design considerations for neural networks performing binary classification tasks.
 \end{abstract}
 
 \section{Introduction}
-In the field of neural networks, binary classification tasks are traditionally approached using a single output neuron with sigmoid activation, where outputs closer to 0 represent one class and outputs closer to 1 represent the other. Despite this convention, an alternative approach exists: using two output neurons with softmax activation, explicitly modeling both the positive and "background" classes. While both approaches can theoretically solve the same problems, their performance characteristics, training dynamics, and generalization capabilities may differ.
+It is very common in the context of neural networks to handle binary classification problems through a single output neuron employing sigmoid activation; outputs nearing 0 are denoting a particular class while outputs approaching 1 are considered of the opposite type. Such a convention can definitely be abandoned; the second way to go about it consists of employing two output neurons under softmax activation, clearly modeling both the positive and "background" classes. Theoretically, both the configurations can solve the same problems, but it is the performance characteristics, training dynamics, and generalization capabilities using the different approaches that could possibly be different.
 
-This research aims to systematically investigate the differences between these two approaches and their impact on various aspects of model performance. We examine whether the additional expressiveness of a two-neuron output layer provides meaningful advantages over the simpler single-neuron approach, or conversely, whether the more constrained single-neuron architecture offers benefits in terms of regularization and generalization.
+In this research, we try to systematically explain the difference between the two approaches and their influence on other qualities of model performance. We investigate whether the greater expressiveness afforded by the two-neuron output layer is truly an advantage or whether the single-neuron approach, with less expressiveness, presents some benefits of regularization and generalization.
 
 \section{Background and Related Work}
 
 \subsection{Neural Network Output Layers for Classification}
-Binary classification in neural networks has historically been implemented using a single output neuron with sigmoid activation [4]. The sigmoid function maps the network's output to a value between 0 and 1, which can be interpreted as the probability of the positive class. This approach is mathematically elegant and directly tied to logistic regression.
+Binary classification in neural networks has been historically implemented using one single output neuron with a  sigmoid activation [4]. The sigmoid function maps  output value of the networkbetween 0 and 1, which can be considered as the probability of the positive class. This approach is mathematically accurate and directly tied to logistic regression.
 
-The alternative approach uses two output neurons with softmax activation, which produces a probability distribution over the two classes [6]. While this is the standard approach for multi-class classification problems, its application to binary problems is less common but theoretically sound.
+The alternative another approach uses two output neurons with softmax activation, which produces a probability distribution over the two classes [6]. While this is the standard approach for multi-class classification problems, its application to binary problems is less common in neural network architectures but theoretically possible.
 
-Variants of the two-neuron softmax design have also been explored for binary problems. Memisevic et al. [6] introduced gated softmax, while Tyagi et al. [5] revisited the sigmoid–versus-softmax debate and showed that a properly tuned sigmoid–MSE objective can outperform softmax–cross-entropy. Further investigations include Yang et al. [13], Klimo et al. [14], Maharjan et al. [15], and Hu et al. [16], which explore alternative loss functions, error-detecting output codes, and hardware-efficient softmax implementations.
+Variants of these two-neuron softmax design have also been explored for binary problems. Memisevic et al. [6] introduced gated softmax in their work while Tyagi et al. [5] revisited the sigmoid–versus-softmax debate and showed that a properly tuned sigmoid–MSE objective can outperform softmax–cross-entropy. Further more investigations include Yang et al. [13], Klimo et al. [14], Maharjan et al. [15], and Hu et al. [16], which explore alternative loss functions, error-detecting output codes, and hardware-efficient softmax implementations.
 
 \subsection{Related Research}
-Prior research on binary image classification can be grouped into three strands: \textbf{output-layer configurations}, \textbf{Vision Transformer (ViT) models}, and \textbf{optimisation \& activation-function studies}.
+Prior research on binary image classification can be grouped into three types: \textbf{output-layer configurations}, \textbf{Vision Transformer (ViT) models}, and \textbf{optimisation \& activation-function studies}.
 
 \textbf{Output-layer configurations.} The classical choice is a single sigmoid neuron, which directly models the Bernoulli probability of the positive class [4]. Variants of the two-neuron softmax design have also been explored for binary problems. Memisevic et al. [6] introduced gated softmax, while Tyagi et al. [5] revisited the sigmoid-versus-softmax debate and showed that a properly tuned sigmoid–MSE objective can outperform softmax–cross-entropy.
 
-\textbf{Vision Transformers.} Dosovitskiy et al.'s seminal ViT work [1] demonstrated that pure transformer architectures can match or surpass CNNs on large-scale image classification. Comprehensive surveys [2, 3] and data-efficient variants such as DeiT [11] together with the study by Khalil et al. [12] confirm ViT's competitiveness, motivating its inclusion in our comparison. The transformer paradigm itself originated with Vaswani et al. [20]. Additional surveys and architectural improvements—Khan et al. [17], the hierarchical Swin Transformer [18], Twins spatial-attention design [19], token-based Visual Transformers [21], comparative reviews [22], privacy-preserving ViT applications [24], and ViT image-classification case studies [23]—further demonstrate the breadth of transformer-based methods.
+\textbf{Vision Transformers.} Dosovitskiy et al.'s seminal ViT work [1] demonstrated that pure transformer architectures can match or surpass CNNs on large-scale image classification. Comprehensive surveys [2, 3] and data-efficient variants such as DeiT [11] together with the study by Khalil et al. [12] confirm ViT's competitiveness, motivating its inclusion in our comparison. The transformer paradigm itself originated with Vaswani et al. [20]. Additional surveys and architectural improvements—Khan et al. [17], the hierarchical Swin Transformer [18], Twins spatial-attention design [19], token-based Visual Transformers [21], comparative reviews [22], privacy-preserving ViT applications [24], and ViT image-classification case studies [23] further demonstrate the breadth of transformer-based methods for image classification.
 
-\textbf{Optimisation and activation functions.} Learning dynamics are also shaped by the non-linearity used in the hidden layers. Large empirical benchmarks [7, 8] and theoretical analyses [9, 10] highlight the strengths and weaknesses of ReLU, Swish, Softplus and related functions. Complementary studies of Softplus units [25], activation-function comparisons on MNIST [26], empirical analyses across vision tasks [27], and broader surveys [28] provide additional context on activation choice.
+\textbf{Optimisation and activation functions.} Learning dynamics are also created by the non linearity used in the hidden layers. Large empirical benchmarks [7, 8] and theoretical analyses [9, 10] highlight the strengths and weaknesses of ReLU, Swish, Softplus and related functions. Interrelated studies of Softplus units [25], activation-function comparisons on MNIST [26], empirical analyses across vision tasks [27], and broader surveys [28] provide additional context on activation choice.
 
-\textbf{Our contribution.} In contrast to previous studies, we provide the first systematic comparison of single- versus dual-neuron outputs across three architectures (Small CNN, ViT, ResNet-50) under identical hyper-parameters. Our results show a statistically significant advantage ($p = 0.0027$) of the single-neuron design in accuracy, F1, and AUC while incurring no additional computational cost.
+\textbf{Our contribution.}  In contrast to previous studies, we provide the first systematic comparison of single- versus dual-neuron outputs across three architectures (Small CNN, ViT, ResNet-50) under identical hyper-parameters. Our results show a statistically significant advantage ($p = 0.0027$) of the single-neuron design in accuracy, F1, and AUC while incurring no additional computational cost.
 
 \section{Methodology}
 \subsection{Research Questions}
 This study addresses the following key questions:
 \begin{enumerate}
 \item Does the choice between single-neuron and dual-neuron output configurations affect model accuracy, precision, recall, and F1 score in binary classification tasks?
-\item Are there differences in convergence speed, stability, or learning dynamics between the two approaches?
-\item Does one approach generalize better to unseen data than the other?
-\item Are there specific types of binary classification problems or neural architectures where one approach consistently outperforms the other?
+\item Are there any differences in convergence speed, stability, or learning dynamics between single-neuron and dual-neuron models?
+\item Does one approach (single-neuron or dual-neuron) generalize better to unseen data than the other?
+\item Are there any specific types of binary classification problems or neural architectures where one approach consistently outperforms the other?
 \end{enumerate}
 
 \subsection{Experimental Setup}
@@ -133,7 +133,7 @@ Task ID & Class Pair & CIFAR-10 Class IDs \\
 \hline
 \end{tabular}
 
-Pre-processing steps
+\textbf{Pre-processing steps}
 \begin{itemize}
 \item \textbf{Resize} All images are resized to the model‐specific input resolution (32×32 for Small CNN, 224×224 for ViT and ResNet-50).
 \item \textbf{Normalisation} \texttt{mean=[0.485,0.456,0.406]}, \texttt{std=[0.229,0.224,0.225]} (ImageNet statistics).

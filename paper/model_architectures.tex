@@ -1,10 +1,10 @@
 \subsection{Model Architectures}
 
-To provide a comprehensive understanding of the neural network architectures used in our experiments, we present visual diagrams of each model design. These diagrams illustrate the layer configurations, connections, and key architectural features that distinguish each model.
+To provide a detailed understanding of the neural network architectures used in our experiments we show visual diagrams of each model design. These diagrams show the layer configurations, connections, and key architectural features that distinguish each model along with their last output layer neuron.
 
 \subsubsection{Small CNN Architecture}
 
-Our custom Small CNN architecture represents a lightweight convolutional neural network designed specifically for this research. Figures~\ref{fig:small_cnn_arch_single} and \ref{fig:small_cnn_arch_dual} illustrate its structure with single-neuron and dual-neuron output configurations, respectively.
+Our custom Small CNN (developed to generalize our results on custom neural networks if necessary) architecture represents a lightweight convolutional neural network designed specifically for this research. Figures~\ref{fig:small_cnn_arch_single} and \ref{fig:small_cnn_arch_dual} illustrate its structure with single-neuron and dual-neuron output configurations respectively.
 
 \begin{figure}[!htbp]
 \centering
@@ -22,17 +22,17 @@ Our custom Small CNN architecture represents a lightweight convolutional neural 
 
 The Small CNN architecture features:
 \begin{enumerate}
-\item Three convolutional blocks, each containing two convolutional layers with batch normalization, followed by max pooling and dropout
-\item A fully connected layer with 256 neurons, batch normalization, and dropout
+\item Three convolutional blocks each containing two convolutional layers with batch normalization followed by max pooling and dropout
+\item A fully connected layer with 256 neurons, batch normalization and dropout
 \item Either a single-neuron output with sigmoid activation or a dual-neuron output with softmax activation
 \end{enumerate}
 
-This architecture provides a baseline model with approximately 813,000 parameters, all of which are trainable during our experiments.
+This architecture provides a baseline model with approximately 813,000 parameters all of which are trainable during our experiments.
 
 \FloatBarrier
 \subsubsection{ResNet50 Architecture}
 
-For our second architecture, we employed the ResNet50 model with transfer learning. Figures~\ref{fig:resnet50_arch_single} and \ref{fig:resnet50_arch_dual} show the architecture with its characteristic residual connections for both output configurations.
+For our second architecture we used the ResNet50 model with transfer learning. Figures~\ref{fig:resnet50_arch_single} and \ref{fig:resnet50_arch_dual} show the architecture with its characteristic residual connections for both output configurations.
 
 \begin{figure}[!htbp]
 \centering
@@ -61,12 +61,12 @@ The ResNet50 model contains approximately 24.6 million total parameters, with 16
 \FloatBarrier
 \subsubsection{Vision Transformer (ViT) Architecture}
 
-Our third architecture is the Vision Transformer (ViT), which represents the attention-based paradigm in computer vision. Figures~\ref{fig:vit_arch_single} and \ref{fig:vit_arch_dual} illustrate the ViT architecture with its distinctive transformer encoder blocks for both output configurations.
+Our third architecture is the Vision Transformer (ViT) which represents the attention based paradigm in computer vision. Figures~\ref{fig:vit_arch_single} and \ref{fig:vit_arch_dual} illustrate the ViT architecture with its distinctive transformer encoder blocks for both output configurations.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/vit_1neuron_architecture.png}
-\caption{Vision Transformer (ViT) architecture with single-neuron output layer. The model divides the input image into patches, processes them through transformer encoder blocks, and uses the class token representation for classification.}
+\caption{Vision Transformer (ViT) architecture with single-neuron output layer. The model divides the input image into patches and processes them through transformer encoder blocks. The class token representation is used for classification.}
 \label{fig:vit_arch_single}
 \end{figure}
 
@@ -87,17 +87,17 @@ The ViT architecture features:
 \item Either a single-neuron output with sigmoid activation or a dual-neuron output with softmax activation
 \end{enumerate}
 
-The ViT model is the largest in our study with approximately 86 million total parameters, though only about 230,000 of these are trainable due to our transfer learning approach.
+The ViT model is the largest in our study with approximately 86 million total parameters though only about 230,000 of these are trainable due to our transfer learning approach.
 
 \FloatBarrier
 \subsubsection{Output Layer Configurations}
 
-As shown in Figures \ref{fig:small_cnn_arch_single}--\ref{fig:vit_arch_dual}, for each architecture, we implemented two output layer configurations:
+As shown in Figures \ref{fig:small_cnn_arch_single}--\ref{fig:vit_arch_dual}, for each architecture we implemented two output layer configurations:
 
 \begin{enumerate}
-\item \textbf{Single-Neuron Configuration}: A single output neuron with sigmoid activation, where outputs closer to 0 represent one class and outputs closer to 1 represent the other class. The loss function used is Binary Cross Entropy.
+\item \textbf{Single-Neuron Configuration}: A single output neuron with sigmoid activation where outputs closer to 0 represent one class and outputs closer to 1 represent the other class. The loss function used is Binary Cross Entropy.
 
-\item \textbf{Dual-Neuron Configuration}: Two output neurons with softmax activation, where each neuron represents the probability of the input belonging to one of the two classes. The loss function used is Cross Entropy.
+\item \textbf{Dual-Neuron Configuration}: Two output neurons with softmax activation where each neuron represents the probability of the input belonging to one of the two classes. The loss function used is Cross Entropy.
 \end{enumerate}
 
-As shown in our parameter analysis, the difference in parameter count between these two configurations is minimal (less than 0.1\% increase), ensuring that performance differences can be attributed to the architectural choice rather than model capacity.
+As shown in our parameter analysis the difference in parameter count between these two configurations is minimal (less than 0.1\% increase), ensuring that performance differences can be attributed to the architectural choice rather than model capacity.
