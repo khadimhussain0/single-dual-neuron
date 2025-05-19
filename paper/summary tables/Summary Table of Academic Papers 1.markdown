@@ -1,0 +1,10 @@
+# Summary Table of Academic Papers
+
+| S. No | Author(s) & Year | Title of Paper | Method/Model Used | Dataset Name | Results/Findings |
+|-------|------------------|----------------|-------------------|--------------|------------------|
+| 1 | A. Dosovitskiy et al., 2020 | An Image is Worth 16×16 Words: Transformers for Image Recognition at Scale | Vision Transformer (ViT) | ImageNet, CIFAR-100, VTAB | Achieved 88.55% accuracy on ImageNet with ViT-H/14, outperforming CNNs with fewer resources. |
+| 2 | Y. Wang et al., 2025 | Vision Transformers for Image Classification: A Comparative Survey | Comparative survey of Vision Transformers | ImageNet, CIFAR-10, CIFAR-100, JFT-300M, VTAB | ViT-B/16 achieves 77.9% on ImageNet, DeiT-S achieves 79.8%, showing ViTs’ competitive edge. |
+| 3 | K. Han et al., 2023 | A Survey on Vision Transformer | Survey of Vision Transformers | Various vision tasks (e.g., classification, detection) | ViTs perform competitively with CNNs, excelling in long-range dependency modeling. |
+| 4 | S. Yang et al., 2018 | Binary Output Layer of Feedforward Neural Networks for Solving Multi-Class Classification Problems | Binary output layer approach | MNIST, four-class, eight-class, eleven-class, twenty-six-class datasets | Comparable or better accuracy than one-to-one approach with fewer output nodes. |
+| 5 | K. Tyagi et al., 2024 | Making Sigmoid-MSE Great Again: Output Reset Challenges Softmax Cross-Entropy | MSE with sigmoid and Output Reset algorithm | MNIST, CIFAR-10, Fashion-MNIST | MSE matches SCE accuracy and outperforms it with noisy data. |
+| 6 | R. Memisevic et al., 2010 | Gated Softmax Classification | Gated Softmax Classification (log-bilinear model) | MNIST variations, rectangles, convex datasets | Competitive error rates, e.g., 0.56% on rectangles, 11.75% on mnistrot. |

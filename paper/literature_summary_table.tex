@@ -1,0 +1,81 @@
+\subsection{Summary of Related Literature}
+
+Table~\ref{tab:literature_summary1} and Table~\ref{tab:literature_summary2} present a comprehensive overview of key papers relevant to our research on binary classification output layer configurations and neural network architectures.
+
+\begin{table}[htbp]
+\scriptsize
+\centering
+\caption{Summary of related work on vision transformers and neural architectures}
+\label{tab:literature_summary1}
+\begin{tabular}{|c|p{1.8cm}|p{2.5cm}|p{2.5cm}|p{2.2cm}|p{2.5cm}|}
+\hline
+\textbf{\ S.No} & \textbf{Author(s) \& Year} & \textbf{Title} & \textbf{Method/Model} & \textbf{Dataset} & \textbf{Key Findings} \\ 
+\hline
+1 & Dosovitskiy et al., 2020 & An Image is Worth 16×16 Words: Transformers for Image Recognition at Scale & Vision Transformer (ViT) & ImageNet, CIFAR-100, VTAB & 88.55\% accuracy on ImageNet with ViT-H/14 \\ 
+\hline
+2 & Wang et al., 2025 & Vision Transformers for Image Classification: A Comparative Survey & Comparative survey & ImageNet, CIFAR-10/100, JFT-300M & ViT-B/16: 77.9\%, DeiT-S: 79.8\% \\ 
+\hline
+3 & Han et al., 2023 & A Survey on Vision Transformer & Survey of Vision Transformers & Various vision tasks & ViTs perform competitively with CNNs \\ 
+\hline
+4 & Yang et al., 2018 & Binary Output Layer of Feedforward Neural Networks for Multi-Class Classification & Binary output layer approach & MNIST, multi-class datasets & Better accuracy with fewer nodes \\ 
+\hline
+5 & Tyagi et al., 2024 & Making Sigmoid-MSE Great Again: Output Reset Challenges Softmax Cross-Entropy & MSE with sigmoid and Output Reset & MNIST, CIFAR-10, Fashion-MNIST & MSE matches or outperforms cross-entropy \\ 
+\hline
+6 & Memisevic et al., 2010 & Gated Softmax Classification & Gated Softmax (log-bilinear model) & MNIST variations, rectangles & Competitive error rates \\ 
+\hline
+7 & Eger et al., 2019 & Is it Time to Swish? Comparing Deep Learning Activation Functions & Comparison of 21 activation functions & NLP tasks (MR, SUBJ, TREC) & Penalized tanh most stable across tasks \\ 
+\hline
+8 & Jagtap \& Karniadakis, 2022 & How important are activation functions in regression and classification? & Survey of activation functions & MNIST, CIFAR-10/100, PIML datasets & ReLU variants excel in classification \\ 
+\hline
+9 & Asadi \& Jiang, 2020 & On Approximation Capabilities of ReLU Activation and Softmax Output Layer & Theoretical analysis & N/A (theoretical work) & Universal approximation theorems \\ 
+\hline
+10 & Dubey et al., 2021 & Activation Functions in Deep Learning: A Comprehensive Survey & Survey of 18 activation functions & CIFAR10/100, IWSLT, WMT & Task-specific optimal activation functions \\ 
+\hline
+11 & Touvron et al., 2021 & Training data-efficient image transformers \& distillation through attention & Data-efficient image Transformers (DeiT) & ImageNet, CIFAR-10/100 & DeiT-B: 83.1\% top-1 accuracy \\ 
+\hline
+12 & Khalil et al., 2023 & A Comprehensive Study of Vision Transformers in Classification Tasks & Various Vision Transformers & ImageNet, CIFAR-10/100 & ViT-H/14: 88.55\% on ImageNet \\ 
+\hline
+13 & Yang et al., 2020 & Binary Output Layer of Extreme Learning Machine & ELM with binary approach & Various classification tasks & Binary approach uses fewer output nodes \\ 
+\hline
+14 & Klimo et al., 2021 & Deep Neural Networks Classification via Binary Error-Detecting Output Codes & Zadeh fuzzy logic with CRC & CIFAR-10, MNIST, Fashion-MNIST & CRC7 achieved 92.44--93.97\% \\ 
+\hline
+
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\scriptsize
+\centering
+\label{tab:literature_summary2}
+\begin{tabular}{|c|p{1.8cm}|p{2.5cm}|p{2.5cm}|p{2.2cm}|p{2.5cm}|}
+\hline
+15 & Maharjan et al., 2020 & A Novel Enhanced Softmax Loss Function for Brain Tumour Detection & CNN with modified softmax loss & Brain tumor images (3064 total) & Improved accuracy by ~2\% with faster processing \\ 
+\hline
+16 & Hu et al., 2018 & Efficient Hardware Architecture of Softmax Layer & Hardware optimization of softmax & Not specified & Hardware optimization of softmax \\ 
+\hline
+17 & Khan et al., 2022 & Transformers in Vision: A Survey & Survey of vision transformers & Various vision datasets & Comprehensive survey of ViTs \\ 
+\hline
+18 & Liu et al., 2021 & Swin Transformer: Hierarchical Vision Transformer & Swin Transformer & ImageNet-1K, COCO, ADE20K & 87.3\% top-1 accuracy on ImageNet-1K \\ 
+\hline
+19 & Chu et al., 2021 & Twins: Revisiting Spatial Attention in Vision Transformers & Twins-PCPVT and Twins-SVT architectures & Various vision tasks & Strong performance across vision tasks \\ 
+\hline
+20 & Vaswani et al., 2017 & Attention Is All You Need & Transformer architecture & Translation datasets & 27.5 BLEU on English-German translation \\ 
+\hline
+21 & Wu et al., 2020 & Visual Transformers: Token-based Image Representation & Visual Transformer (VT), VT-ResNets & ImageNet, COCO-stuff, LIP & 4.6--7 points improvement over ResNet \\ 
+\hline
+22 & Maurício et al., 2023 & Comparing Vision Transformers and CNNs & Literature review & Various benchmarks & ViT better with noisy data; CNN better with small datasets \\ 
+\hline
+23 & Huo et al., 2023 & Vision Transformer Applications in Classification & Various ViT applications & Not accessible & Applications to image classification \\ 
+\hline
+24 & Qi et al., 2022 & Privacy-Preserving Image Classification Using Vision Transformer & ViT with block-wise encryption & CIFAR-10, CIFAR-100 & 96.64\% accuracy on CIFAR-10 \\ 
+\hline
+25 & Zheng et al., 2015 & Improving Deep Neural Networks Using Softplus Units & Softplus activation & Various datasets & Benefits of softplus activation \\ 
+\hline
+26 & Pedamonti, 2018 & Comparison of Non-Linear Activation Functions & DNNs with various activations & MNIST & ELU achieved up to 98.3\% on MNIST \\ 
+\hline
+27 & Alcantara, 2017 & Empirical Analysis of Non-Linear Activation Functions & DNNs with various activations & MNIST & ELU with learning rate 0.02 achieved 98.0\% \\ 
+\hline
+28 & Sharma et al., 2017 & Activation Functions in Neural Networks & Survey of activation functions & Various applications & Survey of common activation functions \\ 
+\hline
+\end{tabular}
+\end{table}
