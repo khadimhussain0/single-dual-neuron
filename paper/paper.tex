@@ -163,16 +163,16 @@ Data augmentation & As listed in Sec. 3.4 \\
 
 \section{Results}
 \subsection{Performance Comparison}
-We conducted extensive experiments across three different architectures (Small CNN, Vision Transformer, and ResNet50) and three different binary classification tasks from the CIFAR-10 dataset. Figure 1 provides a comprehensive comparison of accuracy across all our experiments, clearly demonstrating the consistent advantage of the single-neuron approach.
+We perfomed extensive experiments across three different architectures (Small CNN, Vision Transformer, and ResNet50) and three different binary classification tasks from the CIFAR-10 dataset. Figure 1 provides detailed comparison of accuracy across all our experiments and it clearly demonstrates the consistent advantage of the single-neuron approach.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/accuracy_comparison.png}
-\caption{Comparison of classification accuracy across all architectures and binary classification tasks, showing consistent advantage of single-neuron models.}
+\caption{Comparison of classification accuracy across all architectures and binary classification tasks showing consistent advantage of single-neuron models.}
 \end{figure}
 
 \subsubsection{Small CNN Architecture}
-For the Small CNN architecture classifying airplanes vs. automobiles (classes 0 vs. 1), we measured performance across several key metrics:
+For the Small CNN architecture classifying airplanes vs. automobiles (classes 0 vs. 1) we measured performance across several key metrics:
 
 \begin{tabular}{lllll}
 \hline
@@ -184,18 +184,18 @@ ROC AUC & 0.9981 & 0.9973 & -0.0008 & 0.08\% \\
 \hline
 \end{tabular}
 
-The results indicate that for this particular task and architecture, the single-neuron approach outperformed the dual-neuron approach across all metrics. While the differences may appear small in absolute terms, they represent consistent improvements in model performance.
+The results indicate that for this particular task and architecture, the single-neuron approach outperformed the dual-neuron approach across all metrics. While the differences may appear small in absolute terms they represent consistent improvements in model performance.
 
-Figure 2 shows the training dynamics for this architecture, where we can observe that the single-neuron model converged faster and maintained a consistent advantage throughout training.
+Figure 2 shows the training dynamics for this architecture where we can observe that the single-neuron model converged faster and maintained a consistent advantage throughout training.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/learning_curves.png}
-\caption{Learning curves for all architectures and tasks, showing training dynamics differences between single-neuron and dual-neuron approaches.}
+\caption{Learning curves for all architectures and tasks showing training dynamics differences between single-neuron and dual-neuron approaches.}
 \end{figure}
 
 \subsubsection{Vision Transformer Architecture}
-Moving to a more advanced architecture, we evaluated Vision Transformer (ViT) on two different binary classification tasks. The results revealed interesting patterns in performance between the single-neuron and dual-neuron approaches. Figure 3 shows a heatmap of performance differences across architectures and tasks.
+Moving to a more advanced and modern architecture we tested Vision Transformer (ViT) on two different binary classification tasks. The results revealed interesting patterns in performance between the single-neuron and dual-neuron approaches. Figure 3 shows a heatmap of performance differences across architectures and tasks.
 
 \begin{figure}[htbp]
 \centering
@@ -215,7 +215,7 @@ Training Stability & High & High & - & - \\
 \hline
 \end{tabular}
 
-With the airplane vs. automobile class pair, both approaches performed very well, with the single-neuron approach achieving slightly better results. The single-neuron approach reached its best validation accuracy of 99.65\% by epoch 8 and maintained high performance throughout training. The dual-neuron approach also showed strong performance with 99.60\% accuracy.
+With the airplane vs. automobile class pair both approaches performed very well with the single-neuron approach achieving slightly better results. The single-neuron approach reached its best validation accuracy of 99.65\% by epoch 8 and maintained high performance throughout training. The dual-neuron approach also showed strong performance with 99.60\% accuracy.
 
 Figure 4 illustrates the convergence behavior between the two approaches:
 
@@ -225,7 +225,7 @@ Figure 4 illustrates the convergence behavior between the two approaches:
 \caption{Epochs to convergence comparison across all architectures and tasks.}
 \end{figure}
 
-Both approaches demonstrated stable optimization, though the single-neuron model converged slightly faster, reaching peak performance 1-2 epochs earlier than the dual-neuron model.
+Both approaches demonstrated stable optimization though the single-neuron model converged slightly faster reaching peak performance 1-2 epochs earlier than the dual-neuron model.
 
 \textbf{Experiment 2: Cat vs. Dog (Classes 3 vs. 5)}
 
@@ -239,7 +239,7 @@ ROC AUC & 0.9871 & 0.9868 & -0.0004 & -0.04\% \\
 \hline
 \end{tabular}
 
-In this second experiment with a more challenging class pair, both output layer configurations successfully learned the task, though the dual-neuron approach achieved slightly better results.
+In this second experiment with a more challenging class pair both output layer configurations successfully learned task though the dual-neuron approach achieved slightly better results.
 
 Figure 5 quantifies the percentage improvement of single-neuron over dual-neuron across all experiments:
 
@@ -249,12 +249,12 @@ Figure 5 quantifies the percentage improvement of single-neuron over dual-neuron
 \caption{Percentage improvement of single-neuron over dual-neuron approach across all architectures and classification tasks.}
 \end{figure}
 
-While the performance gap between single-neuron and dual-neuron approaches with ViT was smaller than observed with other architectures, the single-neuron approach maintained a consistent advantage across both classification tasks. This suggests that the Vision Transformer architecture's self-attention mechanism may be less sensitive to output layer choice compared to traditional CNNs, though the single-neuron approach still maintains an advantage.
+While the performance gap between single-neuron and dual-neuron approaches with ViT was smaller than observed with other architectures the single-neuron approach maintained a consistent advantage across both classification tasks. This suggests that the Vision Transformer architecture's self-attention mechanism may be less sensitive to output layer choice compared to traditional CNNs though the single-neuron approach still maintains an advantage.
 
-These results indicate that the advantages of the single-neuron approach generalize across different architectural paradigms, from traditional CNNs to modern attention-based models like Vision Transformers.
+These results indicate that the advantages of the single-neuron approach generalize across different architectural paradigms from traditional CNNs to modern attention-based models like Vision Transformers.
 
 \subsubsection{ResNet50 Architecture}
-For the ResNet50 architecture classifying frogs vs. ships (classes 6 vs. 8), we observed the single-neuron advantage maintained, albeit with a smaller performance gap:
+For the ResNet50 architecture classifying frogs vs. ships (classes 6 vs. 8) we observed the single-neuron advantage maintained albeit with a smaller performance gap:
 
 \begin{tabular}{lllll}
 \hline
@@ -266,14 +266,14 @@ ROC AUC & 0.9999 & 0.9998 & -0.0001 & 0.01\% \\
 \hline
 \end{tabular}
 
-The ResNet50 experiments further reinforce the finding that the single-neuron approach tends to yield better performance, even with a different model architecture and class pair. Notably, both approaches achieved very high accuracy with ResNet50, but the single-neuron model maintained a small but consistent edge.
+The ResNet50 experiments further reinforce the finding that the single-neuron approach tends to yield better performance even with a different model architecture and class pair. Notably both approaches achieved very high accuracy with ResNet50 but the single-neuron model maintained a small but consistent edge.
 
-Figure 6 shows the learning dynamics for ResNet50, demonstrating the rapid convergence of both approaches with this powerful architecture:
+Figure 6 shows the learning dynamics for ResNet50 demonstrating the rapid convergence of both approaches with this powerful architecture:
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/f1_score_comparison.png}
-\caption{F1 score comparison across all architectures and tasks, showing consistent advantage of the single-neuron approach even with the most powerful architectures.}
+\caption{F1 score comparison across all architectures and tasks showing consistent advantage of the single-neuron approach even with the most powerful architectures.}
 \end{figure}
 
 The radar plot in Figure 7 provides a holistic view of model performance across multiple metrics for all architectures and tasks:
@@ -281,14 +281,14 @@ The radar plot in Figure 7 provides a holistic view of model performance across 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/radar_chart_comparison.png}
-\caption{Radar chart visualization comparing all single-neuron models across different metrics, architectures, and classification tasks.}
+\caption{Radar chart visualization comparing all single-neuron models across different metrics architectures and classification tasks.}
 \end{figure}
 
 \subsubsection{Cross-Architecture Comparison}
 Comparing the results across all architectures and experiments reveals several important insights:
 
 \begin{enumerate}
-\item \textbf{Performance Gradient Across Architectures}: As model complexity increases from Small CNN to Vision Transformer to ResNet50, overall performance generally improves for both output layer approaches:
+\item \textbf{Performance Gradient Across Architectures}: As model complexity increases from Small CNN to Vision Transformer to ResNet50 overall performance generally improves for both output layer approaches:
   \begin{itemize}
   \item Small CNN (airplane vs. auto): $\sim$97-98\% accuracy
   \item Vision Transformer (airplane vs. auto): $\sim$99.6-99.7\% accuracy
@@ -296,42 +296,42 @@ Comparing the results across all architectures and experiments reveals several i
   \item ResNet50 (frog vs. ship): $\sim$99.4-99.7\% accuracy
   \end{itemize}
 
-\item \textbf{Consistent Single-Neuron Advantage}: The performance advantage of the single-neuron approach persisted across all architectures and tasks, with performance gaps ranging from modest ($\sim$0.3\% for ResNet50, $\sim$1-2\% for Vision Transformer) to more substantial ($\sim$10\% for Small CNN). This strong consistency across diverse architectures and classification tasks provides robust evidence for the practical superiority of the single-neuron approach.
+\item \textbf{Consistent Single-Neuron Advantage}: The performance advantage of the single-neuron approach persists across all architectures and tasks with performance gaps ranging from modest ($\sim$0.3\% for ResNet50, $\sim$1-2\% for Vision Transformer) to more substantial ($\sim$10\% for Small CNN). This strong consistency across diverse architectures and classification tasks provides very robust evidence for the practical superiority of the single-neuron approach.
 
 \item \textbf{Task Difficulty and Output Layer Interaction}: Our experiments with Vision Transformer revealed that task difficulty interacts with output layer choice:
   \begin{itemize}
-  \item For the easier airplane vs. auto task, both approaches performed well with a $\sim$0.05\% performance gap
-  \item For the more challenging cat vs. dog task, both approaches learned successfully, with a slightly larger $\sim$0.42\% performance gap
+  \item For the easier airplane vs. auto task both approaches performed well with a $\sim$0.05\% performance gap
+  \item For the more challenging cat vs. dog task both approaches learned successfully with a slightly larger $\sim$0.42\% performance gap
   \end{itemize}
   
-  This suggests that the Vision Transformer architecture's self-attention mechanism may be more robust to output layer choice compared to traditional CNNs, though the single-neuron approach still maintains an advantage.
+  This suggests that architecture of Vision Transformer self-attention mechanism may be more robust to output layer choice compared to traditional CNNs though the single-neuron approach still maintains an advantage over dual-neuron approach.
 
-\item \textbf{Optimization Stability}: The single-neuron approach demonstrated more stable optimization behavior across all experiments. With Vision Transformer, both approaches showed generally stable training dynamics, though the single-neuron model typically converged faster and achieved better final performance.
+\item \textbf{Optimization Stability}: The single-neuron approach showed more stable optimization behavior across all experiments. With Vision Transformer both approaches showed generally stable training dynamics though the single-neuron model typically converged faster and achieved better final performance.
 
-\item \textbf{Architectural Sensitivity}: The performance impact of output layer choice appears less pronounced in attention-based architectures like Vision Transformer compared to traditional CNNs:
+\item \textbf{Architectural Sensitivity}: The performance impact of output layer choice appears less prominent in attention-based architectures like Vision Transformer compared to traditional CNNs:
   \begin{itemize}
   \item Vision Transformer models with both output configurations achieved strong performance
   \item The performance gap between single-neuron and dual-neuron was consistently smaller ($\sim$0.05-0.42\%) with Vision Transformer than with the Small CNN
   \end{itemize}
   
-  This suggests that advanced architectures like Vision Transformer and ResNet50 may partially mitigate suboptimal output layer choices through their more sophisticated feature extraction capabilities.
+  This suggests that advanced architectures like Vision Transformer and ResNet50 may partially mitigate suboptimal output layer choices through their more advanced and sophisticated feature extraction capabilities in their architecture.
 
-\item \textbf{Practical Implications}: Our findings indicate that practitioners should prefer the single-neuron sigmoid approach for binary classification tasks across all architectures. While the performance advantage varies by architecture type, with smaller gains observed in modern architectures like Vision Transformer, the single-neuron approach consistently delivers better results with no disadvantages.
+\item \textbf{Practical Implications}: Our findings indicate that practitioners should prefer the single-neuron sigmoid approach for binary classification tasks across all architectures. While the performance advantage varies by architecture type with smaller gains observed in modern architectures like Vision Transformer the single-neuron approach always consistently delivers better results with fewer parameters and with no disadvantages.
 \end{enumerate}
 
 \subsection{Training Dynamics}
-An important aspect of our study is understanding how the choice of output layer architecture affects the training process. We analyze convergence patterns, learning curves, and stability during training for both approaches.
+A very important aspect of our study is understanding how choice of output layer architecture affects the training process. We analyze convergence patterns, learning curves and stability during training for both output layerapproaches.
 
 \subsubsection{Convergence Speed}
-Our experiments revealed interesting patterns in how quickly models reached their optimal performance:
+Our experiments showed very interesting patterns in how quickly models reached their optimal performance:
 
 \begin{enumerate}
-\item \textbf{Vision Transformer Models}: The single-neuron model typically converged in fewer epochs compared to the dual-neuron model. In our experiments, the validation loss for the single-neuron model decreased more quickly in early epochs, typically requiring 1-2 fewer epochs to reach peak validation performance.
+\item \textbf{Vision Transformer Models}: The single-neuron model typically converged in fewer epochs compared to the dual-neuron model. In our experiments the validation loss for the single-neuron model decreased more quickly in early epochs typically requiring 1-2 fewer epochs to reach peak validation performance as compared to two-neuron model.
 
-\item \textbf{ResNet50 Models}: The convergence gap was less pronounced in ResNet50 models, where both approaches demonstrated rapid convergence. However, the single-neuron model still reached its best validation performance slightly earlier (typically by 1-2 epochs) than the dual-neuron model.
+\item \textbf{ResNet50 Models}: The convergence gap was very less pronounced in ResNet50 models where both approaches demonstrated rapid convergence. However single-neuron model still reached its best validation performance slightly earlier (typically by 1-2 epochs) than the dual-neuron model.
 \end{enumerate}
 
-This faster convergence of single-neuron models may be attributed to the simpler optimization landscape with fewer parameters in the output layer.
+This faster convergence of single-neuron models may be attributed to the simpler optimization landscape with fewer parameters in the output layer as compared to two-neuron model with slightly more parameters in overall model.
 
 \input{model_parameters}
 

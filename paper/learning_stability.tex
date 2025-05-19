@@ -1,31 +1,31 @@
 \subsubsection{Learning Stability}
 
-We observed differences in the stability of the learning process between the two approaches:
+We found differences in stability of the learning process between the two approaches of the models:
 
 \begin{enumerate}
-\item \textbf{Validation Loss Fluctuations}: The dual-neuron models tended to exhibit greater fluctuations in validation loss during training. This was particularly evident in the Small CNN experiments, where the validation loss curve for the dual-neuron model showed more pronounced oscillations.
+\item \textbf{Validation Loss Fluctuations}: The dual-neuron models seemed to exhibit greater fluctuations in validation loss during training. This was particularly very evident in the Small CNN experiments where the validation loss curve for the dual-neuron model showed more pronounced oscillations.
 
-\item \textbf{Overfitting Tendency}: The dual-neuron approach showed slightly higher susceptibility to overfitting, especially in the Small CNN architecture. This manifested as a growing gap between training and validation accuracy as training progressed.
+\item \textbf{Overfitting Tendency}: The dual-neuron approach showed slightly higher susceptibility to overfitting especially in the Small CNN architecture. This manifested as a growing gap between training and validation accuracy as training progressed further.
 
-\item \textbf{Learning Rate Sensitivity}: Both approaches benefited from learning rate scheduling, but the dual-neuron models appeared more sensitive to learning rate adjustments, often showing more dramatic improvements after learning rate reductions.
+\item \textbf{Learning Rate Sensitivity}: Both approaches benefited from learning rate scheduling but the dual-neuron models appeared more sensitive to learning rate adjustments often showing more dramatic improvements after learning rate reductions but this can't be considered as edge of single neuron model performance since these are short term fluctuations in improvements.
 \end{enumerate}
 
-These observations suggest that the single-neuron approach may offer a more stable optimization path, potentially due to its more constrained parameter space.
+These observations suggest that the single-neuron approach may offer a more stable optimization path potentially due to its more constrained parameter space.
 
 \subsection{Generalization Capability}
 
-A critical aspect of any machine learning model is its ability to generalize beyond the training data. Our experiments revealed several important insights regarding the generalization capabilities of single-neuron versus dual-neuron approaches.
+A critical aspect of any machine learning model is its ability to generalize beyond the training data. And for this aspect our experiments showed many important insights regarding the generalization capabilities of single-neuron versus dual-neuron approaches.
 
 \subsubsection{Test Performance}
 
-When evaluating on held-out test data, we observed that both approaches generalized well, but with consistent differences:
+When evaluating on held-out test data we observed that both approaches generalized well but with consistent differences:
 
 \begin{enumerate}
-\item \textbf{Generalization Gap}: The single-neuron models maintained their performance advantage on test data. For the Small CNN on airplane vs. automobile classification, the test accuracy was 0.9835 for the single-neuron approach compared to 0.9735 for the dual-neuron approach.
+\item \textbf{Generalization Gap}: The single-neuron models maintained their performance advantage on test data. For the Small CNN on airplane vs. automobile classification the test accuracy was 0.9835 for the single-neuron approach compared to 0.9735 for the dual-neuron approach.
 
-\item \textbf{Robustness Across Class Pairs}: The generalization advantage of the single-neuron approach was consistent across different binary classification tasks, including more challenging class pairs with higher visual similarity (like cat vs. dog).
+\item \textbf{Robustness Across Class Pairs}: The generalization advantage of the single-neuron approach was consistent across different binary classification tasks including more challenging class pairs with higher visual similarity (like cat vs. dog).
 
-\item \textbf{Performance on Edge Cases}: Qualitative analysis of misclassifications showed that both approaches struggled with similar edge cases, but the dual-neuron approach typically had a higher error rate on these challenging examples.
+\item \textbf{Performance on Edge Cases}: Qualitative analysis of misclassifications showed that both approaches struggled with similar edge cases but the dual-neuron approach typically had a higher error rate on these challenging examples as compared to single neuron approach.
 \end{enumerate}
 
 \subsubsection{Training-Test Performance Gap}
@@ -33,27 +33,27 @@ When evaluating on held-out test data, we observed that both approaches generali
 The gap between training and test performance provides insights into potential overfitting:
 
 \begin{enumerate}
-\item \textbf{Small CNN Models}: The dual-neuron approach showed a larger gap between training and test accuracy (approximately 2-3\% difference) compared to the single-neuron approach (approximately 1-2\% difference), suggesting slightly higher overfitting tendencies.
+\item \textbf{Small CNN Models}: The dual-neuron approach showed a larger gap between training and test accuracy (approximately 2-3\% difference) compared to the single-neuron approach (approximately 1-2\% difference) suggesting slightly higher overfitting tendencies.
 
-\item \textbf{ResNet50 Models}: Both approaches maintained similar training-test gaps with ResNet50, likely due to the regularizing effect of transfer learning from pre-trained weights.
+\item \textbf{ResNet50 Models}: Both approaches maintained similar training-test gaps with ResNet50 likely due to the regularizing effect of transfer learning from pre-trained weights.
 \end{enumerate}
 
-These observations suggest that the single-neuron approach may offer better regularization properties, particularly in smaller network architectures. This could be attributed to the more constrained parameter space of the single-neuron output layer, which may help prevent the model from fitting noise in the training data.
+These observations suggest that the single-neuron approach may offer better regularization features particularly in smaller network architectures. This could be attributed to the more constrained parameter space of the single-neuron output layer which may help prevent to the model from fitting noise in the training data.
 
 \subsection{Architecture-Specific Effects}
 
-Our experiments with different neural network architectures revealed interesting interactions between the network backbone and the output layer configuration.
+Our experiments with different neural network architectures showed very interesting interactions between the network backbone and the output layer configuration.
 
 \subsubsection{Small CNN vs. ResNet50}
 
 Comparing the performance differences across architectures:
 
 \begin{enumerate}
-\item \textbf{Magnitude of Performance Gap}: The performance gap between single-neuron and dual-neuron approaches was more pronounced in the Small CNN architecture (accuracy difference of 0.0100) compared to the ResNet50 architecture (accuracy difference of 0.0030 for frog vs. ship classification).
+\item \textbf{Magnitude of Performance Gap}: The performance gap between single-neuron and dual-neuron approaches was more visible in the Small CNN architecture (accuracy difference of 0.0100) compared to the ResNet50 architecture (accuracy difference of 0.0030 for frog vs. ship classification).
 
-\item \textbf{Overall Performance Ceiling}: ResNet50 models achieved higher absolute performance regardless of output layer configuration, with both approaches reaching $>$99\% accuracy on some class pairs. This suggests that for sufficiently powerful models, the choice of output layer may have diminished importance.
+\item \textbf{Overall Performance Ceiling}: ResNet50 models achieved higher absolute performance regardless of output layer configuration, with both approaches reaching $>$99\% accuracy on some class pairs. This suggests that for sufficiently powerful models the choice of output layer may have diminished importance but still single-neuron approach outperforms the dual-neuron approach.
 
-\item \textbf{Parameter Efficiency}: The relative parameter efficiency of the single-neuron approach is more significant in smaller models like our custom CNN, where the output layer represents a higher proportion of total parameters.
+\item \textbf{Parameter Efficiency}: The relative parameter efficiency of the single-neuron approach is more significant in smaller models like our custom CNN where the output layer represents a higher proportion of total parameters.
 \end{enumerate}
 
 \subsubsection{Transfer Learning Effects}
@@ -63,9 +63,9 @@ For models using transfer learning (ResNet50):
 \begin{enumerate}
 \item \textbf{Feature Extraction Quality}: Both output layer approaches benefited similarly from the high-quality features extracted by pre-trained ResNet50 layers.
 
-\item \textbf{Fine-Tuning Dynamics}: During fine-tuning, the single-neuron models required slightly less adaptation of the pre-trained features, suggesting better compatibility with general visual features extracted by ImageNet-trained networks.
+\item \textbf{Fine-Tuning Dynamics}: During fine-tuning the single-neuron models required slightly less adaptation of the pre-trained features suggesting that better compatibility with general visual features extracted by ImageNet-trained networks.
 
-\item \textbf{Convergence with Limited Data}: When training with reduced dataset sizes, the single-neuron approach showed more robust performance, particularly with the ResNet50 architecture, suggesting better generalization from limited examples.
+\item \textbf{Convergence with Limited Data}: When training with reduced dataset sizes the single-neuron approach showed more robust performance specially with ResNet50 architecture suggesting better generalization from limited examples.
 \end{enumerate}
 
-These findings suggest that while the single-neuron approach consistently outperforms the dual-neuron approach, the magnitude of this advantage varies with network architecture. The performance gap appears to narrow as model capacity increases, though the single-neuron approach maintains its edge even in high-capacity models.
+These findings suggest that while the single-neuron approach consistently outperforms the dual-neuron approach the magnitude of this advantage varies with network architecture. The performance gap appears to narrow as model capacity increases though the single-neuron approach maintains its edge even in high-capacity models.
