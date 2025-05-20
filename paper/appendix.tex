@@ -36,7 +36,7 @@ ResNet50 & 6 vs 8 & 6 & 7 & 1 & 14.3\% \\
 
 \subsection{Statistical Significance}
 
-To verify that the observed performance gaps are not attributable to random variation, we performed a paired $t$-test on \textbf{accuracy, F1, and AUC} scores for each architecture--task combination (2 binary tasks $\times$ 3 architectures $\Rightarrow$ N = 6 paired samples). The resulting $p$-value of \textbf{0.0027} ($<$ 0.01) confirms that the single-neuron advantage is statistically significant.
+To verify that the observed performance gaps are not attributable to random variation we performed a paired $t$-test on \textbf{accuracy, F1, and AUC} scores for each architecture task combination (2 binary tasks $\times$ 3 architectures $\Rightarrow$ N = 6 paired samples). The resulting $p$-value of \textbf{0.0027} ($<$ 0.01) confirms that the single-neuron advantage is statistically very significant.
 
 \textit{Note on variance.} All reported numbers are obtained with a fixed random seed (42). Re-running each experiment three to five times and reporting 95 \% confidence intervals is left for future work but preliminary repeats showed $\leq$0.2 pp variation in accuracy.
 
@@ -56,4 +56,4 @@ ResNet50 & 21.3 & 21.5 & 5.4 GB & 5.4 GB \\
 \hline
 \end{tabular}
 
-The resource requirements were nearly identical for both output layer configurations, with only negligible differences in training time per epoch. This suggests that the performance advantages of the single-neuron approach come with no additional computational cost.
+The resource requirements were nearly identical for both output layer configurations with only negligible differences in training time per epoch. This suggests that the performance advantages of the single-neuron approach come with no additional computational cost even if there are small increase in model parameters size but it makes less signifcant in larger networks.

@@ -1,49 +1,49 @@
 \section{Conclusion}
 
-This study provides a comprehensive empirical comparison between single-neuron and dual-neuron output layer configurations for binary classification neural networks. Through extensive experimentation with multiple architectures and datasets, we have identified consistent patterns that provide valuable insights for both theoretical understanding and practical implementation.
+This study provides a very comprehensive detailed comparison between these two single-neuron and dual-neuron output layer configurations for binary classification problem in neural networks. With very extensive experimentation with multiple architectures and datasets and tasks we have identified consistent patterns that provide valuable insights for both theoretical understanding and practical implementation of classification problems.
 
 \subsection{Summary of Key Findings}
 
 Our research revealed several important findings:
 
 \begin{enumerate}
-\item \textbf{Performance Advantage}: The single-neuron sigmoid approach consistently outperformed the dual-neuron softmax approach across all tested architectures and datasets, though the magnitude of this advantage varied.
+\item \textbf{Performance Advantage}: The single-neuron sigmoid approach always consistently outperforms the dual-neuron softmax approach across all tested architectures and datasets and tasks but magnitude of this advantage varied a bit on some cases but in general it performs well.
 
-\item \textbf{Architecture Dependence}: The performance gap between approaches was more pronounced in smaller architectures (e.g., our custom CNN) compared to larger pre-trained models (ResNet50), suggesting that output layer design becomes less critical as model capacity increases.
+\item \textbf{Architecture Dependence}: The performance gap between these two approaches was more pronounced in smaller architectures (e.g our custom CNN) compared to larger pre-trained models (ResNet50 or ViT) which suggests that output layer design becomes less critical as model capacity increases.
 
-\item \textbf{Training Dynamics}: Single-neuron models typically converged faster and exhibited more stable learning curves, with fewer fluctuations in validation loss during training.
+\item \textbf{Training Dynamics}: Single-neuron models usually converged very fast and exhibited more stable learning curves during training with very fewer and small fluctuations in validation loss during training.
 
-\item \textbf{Generalization Capability}: The single-neuron approach demonstrated better generalization to test data, with smaller gaps between training and test performance, particularly in smaller network architectures.
+\item \textbf{Generalization Capability}: The single-neuron approach demonstrated better generalization on test data with very smaller gaps between training and test performance particularly in smaller network architectures as compared to larger architectures.
 
-\item \textbf{Parameter Efficiency}: Beyond the obvious parameter reduction (one output neuron instead of two), the single-neuron approach appears to make more efficient use of model capacity, especially in constrained model architectures.
+\item \textbf{Parameter Efficiency}: Beyond obvious parameter reduction (one output neuron instead of two) the single-neuron approach appears to make more efficient use of model capacity especially in constrained model architectures which indicates single neuron approach is good in terms of parameter efficiency.
 \end{enumerate}
 
 \subsection{Contributions to the Field}
 
-This work makes several contributions to the understanding of neural network design for binary classification:
+This work makes several contributions to the understanding of neural network design for binary classification tasks or binary classification tasks within multiclass frameworks:
 
 \begin{enumerate}
-\item It provides the first systematic, empirical comparison of output layer architectures specifically for binary classification across different network backbones.
+\item It provides the first systematic empirical comparison of output layer architectures specifically for binary classification across different network backbones with extensive experiments with general model architectures and more advanced architectures.
 
-\item It establishes a clear set of practical guidelines for practitioners implementing binary classification systems, potentially improving model performance in real-world applications.
+\item It establishes a clear set of practical guidelines for practitioners implementing binary classification systems potentially improving model performance in real-world applications or practitioners implement binary classification in multiclass frameworks where it is easier to integrate binary classification with two neurons instead of one.
 
-\item It offers insights into the theoretical aspects of model optimization and decision boundary formation in neural networks, connecting empirical results to theoretical frameworks.
+\item It offers insights into theoretical aspects of model optimization and decision boundary formation in neural networks connecting empirical results to theoretical frameworks with experiments performed in this paper.
 \end{enumerate}
 
 \subsection{Future Research Directions}
 
-Based on our findings, several promising directions for future research emerge:
+Based on our findings several promising directions for future research emerge:
 
 \begin{enumerate}
-\item \textbf{Extension to Multi-Label Problems}: Investigating whether similar patterns hold for multi-label classification, where multiple binary decisions are made simultaneously.
+\item \textbf{Extension to Multi-Label Problems}: Investigating if similar patterns hold true for multi label classification problems where multiple binary decisions are made simultaneously in the process.
 
-\item \textbf{Probability Calibration Analysis}: A deeper exploration of probability calibration properties of both approaches, particularly in risk-sensitive applications.
+\item \textbf{Probability Calibration Analysis}: A deeper exploration of probability calibration properties of both approaches particularly in risk sensitive applications and also deeper exploratio of probability calibration properties of both approaches in real world applications.
 
-\item \textbf{Architecture Search}: Developing automated methods to determine the optimal output layer configuration based on task characteristics and model architecture.
+\item \textbf{Architecture Search}: Developing automated hyperparameter optimization methods to determine optimal output layer configuration based on task characteristics and model architecture which makes the process a part of hyperparamater tuning rather architectural difference.
 
-\item \textbf{Theoretical Analysis}: Formal mathematical analysis of optimization dynamics in both approaches to provide stronger theoretical foundations for the observed empirical differences.
+\item \textbf{Theoretical Analysis}: Formal mathematical analysis of optimization dynamics in both approaches to provide stronger theoretical foundations for the observed empirical differences which can be gradient flow of two approaches, weights update of both approaches and if diminishing of weights in two neuron approach holds true.
 
-\item \textbf{Domain Adaptation}: Examining how the choice of output layer influences transfer learning and domain adaptation capabilities in binary classification scenarios.
+\item \textbf{Domain Adaptation}: Examining how the choice of output layer influences transfer learning and domain adaptation capabilities in binary classification problems during training and validation since overfitting and underfitting can make results unstable to make a conclusion.
 \end{enumerate}
 
-In conclusion, while both single-neuron and dual-neuron approaches are viable for binary classification, our research provides strong evidence favoring the single-neuron sigmoid approach in most practical scenarios. This seemingly minor architectural choice can yield meaningful improvements in model performance, especially in smaller networks or data-constrained settings.
+In conclusion while both single-neuron and dual-neuron approaches are viable for binary classification our research provides strong evidence favoring the single-neuron sigmoid approach in most practical scenarios. This seemingly very minor architectural choice can yield meaningful improvements in model performance especially in smaller networks or data-constrained settings also in larger models helps to generalize well and converge better.
