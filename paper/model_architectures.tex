@@ -95,9 +95,33 @@ The ViT model is the largest in our study with approximately 86 million total pa
 As shown in Figures \ref{fig:small_cnn_arch_single}--\ref{fig:vit_arch_dual}, for each architecture we implemented two output layer configurations:
 
 \begin{enumerate}
-\item \textbf{Single-Neuron Configuration}: A single output neuron with sigmoid activation where outputs closer to 0 represent one class and outputs closer to 1 represent the other class. The loss function used is Binary Cross Entropy.
+\item \textbf{Single-Neuron Configuration}: A single output neuron with sigmoid activation where outputs closer to 0 represent one class and outputs closer to 1 represent the other class. The sigmoid function is defined as:
 
-\item \textbf{Dual-Neuron Configuration}: Two output neurons with softmax activation where each neuron represents the probability of the input belonging to one of the two classes. The loss function used is Cross Entropy.
+\begin{equation}
+\sigma(z) = \frac{1}{1 + e^{-z}}
+\end{equation}
+
+where $z$ is the input to the sigmoid function (the pre-activation output from the previous layer). The output $\sigma(z) \in (0,1)$ represents the probability of the positive class. The loss function used is Binary Cross Entropy, defined as:
+
+\begin{equation}
+\mathcal{L}_{BCE} = -\frac{1}{N}\sum_{i=1}^{N}[y_i \log(\sigma(z_i)) + (1-y_i)\log(1-\sigma(z_i))]
+\end{equation}
+
+where $y_i \in \{0,1\}$ is the true label and $\sigma(z_i)$ is the predicted probability.
+
+\item \textbf{Dual-Neuron Configuration}: Two output neurons with softmax activation where each neuron represents the probability of the input belonging to one of the two classes. The softmax function for binary classification is defined as:
+
+\begin{equation}
+\text{softmax}(z)_j = \frac{e^{z_j}}{e^{z_0} + e^{z_1}} \quad \text{for } j \in \{0,1\}
+\end{equation}
+
+where $z_0$ and $z_1$ are the pre-activation outputs (logits) for the two classes. The loss function used is Categorical Cross Entropy:
+
+\begin{equation}
+\mathcal{L}_{CCE} = -\frac{1}{N}\sum_{i=1}^{N}\sum_{j=0}^{1}y_{i,j}\log(\text{softmax}(z_i)_j)
+\end{equation}
+
+where $y_{i,j}$ is 1 if the true class of example $i$ is $j$, and 0 otherwise.
 \end{enumerate}
 
 As shown in our parameter analysis the difference in parameter count between these two configurations is minimal (less than 0.1\% increase), ensuring that performance differences can be attributed to the architectural choice rather than model capacity.

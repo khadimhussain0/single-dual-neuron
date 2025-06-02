@@ -100,17 +100,35 @@ For training and evaluation, we use binary classification tasks derived from the
 \subsection{Training and Evaluation Protocol}
 All models are trained using the following protocol:
 \begin{itemize}
-\item Optimization: Adam optimizer
+\item Optimization: Adam optimizer with the update rule:
+\begin{equation}
+\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \cdot \hat{m}_t
+\end{equation}
+where $\theta_t$ represents the parameters at time $t$, $\eta$ is the learning rate, $\hat{m}_t$ is the bias-corrected first moment estimate, $\hat{v}_t$ is the bias-corrected second moment estimate, and $\epsilon$ is a small constant for numerical stability.
+
 \item Loss functions: Binary cross-entropy for single-neuron models, categorical cross-entropy for two-neuron models
-\item Learning rate scheduling: Reduce on plateau
-\item Early stopping to prevent overfitting
+\item Learning rate scheduling: Reduce on plateau with factor 0.2 and patience 5 epochs
+\item Early stopping to prevent overfitting with patience 10 epochs
 \item Data augmentation: Standard image augmentation techniques
 \end{itemize}
 
 We evaluate models using:
 \begin{itemize}
-\item Accuracy, precision, recall, and F1 score
-\item ROC curves and AUC
+\item Accuracy, precision, recall, and F1 score, defined as:
+\begin{align}
+\text{Accuracy} &= \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}} \\[0.5em]
+\text{Precision} &= \frac{\text{TP}}{\text{TP} + \text{FP}} \\[0.5em]
+\text{Recall} &= \frac{\text{TP}}{\text{TP} + \text{FN}} \\[0.5em]
+\text{F1 Score} &= \frac{2 \times \text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{align}
+where TP, TN, FP, and FN represent true positives, true negatives, false positives, and false negatives, respectively.
+
+\item ROC curves and AUC (Area Under the ROC Curve):
+\begin{equation}
+\text{AUC} = \int_{0}^{1} \text{TPR}(\text{FPR}^{-1}(x)) \, dx
+\end{equation}
+where TPR is the true positive rate and FPR is the false positive rate.
+
 \item Training and validation loss curves
 \item Confusion matrices
 \end{itemize}

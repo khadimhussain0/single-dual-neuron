@@ -3,11 +3,29 @@
 We found differences in stability of the learning process between the two approaches of the models:
 
 \begin{enumerate}
-\item \textbf{Validation Loss Fluctuations}: The dual-neuron models seemed to exhibit greater fluctuations in validation loss during training. This was particularly very evident in the Small CNN experiments where the validation loss curve for the dual-neuron model showed more pronounced oscillations.
+\item \textbf{Validation Loss Fluctuations}: The dual-neuron models seemed to exhibit greater fluctuations in validation loss during training. This was particularly very much visible in the Small CNN experiments where the validation loss curve for the dual-neuron model showed more pronounced oscillations. We quantified this using the variance of loss differences between consecutive epochs:
 
-\item \textbf{Overfitting Tendency}: The dual-neuron approach showed slightly higher susceptibility to overfitting especially in the Small CNN architecture. This manifested as a growing gap between training and validation accuracy as training progressed further.
+\begin{equation}
+\text{Loss Volatility} = \text{Var}(\mathcal{L}_t - \mathcal{L}_{t-1}), \quad t \in \{2,...,T\}
+\end{equation}
 
-\item \textbf{Learning Rate Sensitivity}: Both approaches benefited from learning rate scheduling but the dual-neuron models appeared more sensitive to learning rate adjustments often showing more dramatic improvements after learning rate reductions but this can't be considered as edge of single neuron model performance since these are short term fluctuations in improvements.
+where $\mathcal{L}_t$ represents the validation loss at epoch $t$, and $T$ is the total number of training epochs.
+
+\item \textbf{Overfitting Tendency}: The dual-neuron approach showed slightly high vulnerability to overfitting and especially in the Small CNN architecture. This seemed to be a growing gap between training and validation accuracy as training progressed further and further. We can show this generalization gap as:
+
+\begin{equation}
+\text{Generalization Gap}_t = |\text{Acc}_{\text{train},t} - \text{Acc}_{\text{val},t}|
+\end{equation}
+
+where $\text{Acc}_{\text{train},t}$ and $\text{Acc}_{\text{val},t}$ are the training and validation accuracies at epoch $t$, respectively.
+
+\item \textbf{Learning Rate Sensitivity}: Both approaches (dual neuron and single neuron) benefited from learning rate scheduling however the dual-neuron models appeared more sensitive to learning rate adjustments often showing more dramatic improvements after learning rate reductions but this can't be considered as edge of single neuron model performance since these are short term fluctuations in improvements not long term. The learning rate schedule followed the form:
+
+\begin{equation}
+\eta_t = \eta_0 \cdot \gamma^{\lfloor t/p \rfloor}
+\end{equation}
+
+where $\eta_t$ is the learning rate at epoch $t$, $\eta_0$ is the initial learning rate, $\gamma$ is the decay factor (0.2 in our experiments), and $p$ is the patience parameter (5 epochs).
 \end{enumerate}
 
 These observations suggest that the single-neuron approach may offer a more stable optimization path potentially due to its more constrained parameter space.
@@ -21,11 +39,29 @@ A critical aspect of any machine learning model is its ability to generalize bey
 When evaluating on held-out test data we observed that both approaches generalized well but with consistent differences:
 
 \begin{enumerate}
-\item \textbf{Generalization Gap}: The single-neuron models maintained their performance advantage on test data. For the Small CNN on airplane vs. automobile classification the test accuracy was 0.9835 for the single-neuron approach compared to 0.9735 for the dual-neuron approach.
+\item \textbf{Generalization Gap}: Single-neuron models maintained their performance advantage on test data. For the Small CNN on airplane vs. automobile classification the test accuracy was 0.9835 for the single-neuron approach compared to 0.9735 for the dual-neuron approach. We measure this consistent performance advantage using:
 
-\item \textbf{Robustness Across Class Pairs}: The generalization advantage of the single-neuron approach was consistent across different binary classification tasks including more challenging class pairs with higher visual similarity (like cat vs. dog).
+\begin{equation}
+\Delta_{\text{accuracy}} = \text{Acc}_{\text{single}} - \text{Acc}_{\text{dual}}
+\end{equation}
 
-\item \textbf{Performance on Edge Cases}: Qualitative analysis of misclassifications showed that both approaches struggled with similar edge cases but the dual-neuron approach typically had a higher error rate on these challenging examples as compared to single neuron approach.
+where $\text{Acc}_{\text{single}}$ and $\text{Acc}_{\text{dual}}$ are the test accuracies for the single-neuron and dual-neuron models, respectively.
+
+\item \textbf{Robustness Across Class Pairs}: Generalization advantage of single-neuron approach was consistent across different binary classification tasks including more challenging class pairs with higher visual similarity (like cat vs. dog). We evaluated the statistical significance of this advantage using a paired t-test:
+
+\begin{equation}
+ t = \frac{\bar{d}}{s_d / \sqrt{n}}
+\end{equation}
+
+where $\bar{d}$ is the mean of the differences in accuracy between single-neuron and dual-neuron models across all tasks, $s_d$ is the standard deviation of these differences, and $n$ is the number of tasks. This test yielded $p = 0.0027$, indicating a statistically significant advantage.
+
+\item \textbf{Performance on Edge Cases}: Qualitative analysis of misclassifications showed that both approaches struggled with similar edge cases but the dual-neuron approach typically had a higher error rate on these challenging examples as compared to single neuron approach. We define the error ratio on difficult examples as:
+
+\begin{equation}
+\text{Error Ratio} = \frac{\text{Error}_{\text{dual}}}{\text{Error}_{\text{single}}}
+\end{equation}
+
+where $\text{Error}_{\text{dual}}$ and $\text{Error}_{\text{single}}$ represent the number of misclassifications on the identified challenging examples for each approach.
 \end{enumerate}
 
 \subsubsection{Training-Test Performance Gap}
